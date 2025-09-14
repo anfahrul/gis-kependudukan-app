@@ -22,7 +22,13 @@ Route::get('/demografi/jenis-kelamin', [DemografiController::class, 'indexJenisK
 Route::get('/demografi/pekerjaan', [DemografiController::class, 'indexPekerjaan']);
 Route::get('/demografi/pendidikan', [DemografiController::class, 'indexPendidikan']);
 
-Route::get('/login', [SessionController::class, 'index']);
-Route::post('/login', [SessionController::class, 'login']);
 
-Route::get('/admin', [AdminController::class, 'index']);
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [SessionController::class, 'index'])->name('login');;
+    Route::post('/login', [SessionController::class, 'login'])->name('login');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index']);
+    Route::post('/logout', [SessionController::class, 'logout'])->name('logout');
+});

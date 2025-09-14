@@ -9,7 +9,8 @@ class AdminController extends Controller
 {
     public function index()
     {
-        echo "Halo selamat datang di Panel Admin";
-        echo "<h1>" . Auth::user()->name . "</h1>";
+        return view('admin.admin-dashboard', [
+            "title" => "Admin Panel",
+        ]);
     }
 }

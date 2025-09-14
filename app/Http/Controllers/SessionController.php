@@ -35,4 +35,10 @@ class SessionController extends Controller
             return redirect('login')->withErrors('Username/Password salah!');
         }
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('login');
+    }
 }
