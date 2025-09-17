@@ -30,7 +30,7 @@ class SessionController extends Controller
         ];
 
         if (Auth::attempt($infoLogin)) {
-            return redirect('admin');
+            return redirect('admin-dashboard');
         } else {
             return redirect('login')->withErrors('Username/Password salah!');
         }

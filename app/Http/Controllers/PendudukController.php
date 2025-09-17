@@ -2,29 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kecamatan;
-use App\Http\Requests\StoreKecamatanRequest;
-use App\Http\Requests\UpdateKecamatanRequest;
+use App\Models\Penduduk;
+use App\Http\Requests\StorePendudukRequest;
+use App\Http\Requests\UpdatePendudukRequest;
 
-class KecamatanController extends Controller
+class PendudukController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $list_kecamatan =  Kecamatan::all();
-        return view('data-kecamatan', [
-            "title" => "Daftar Kecamatan",
-            "list_kecamatan" => $list_kecamatan
-        ]);
+        //
     }
 
     public function indexAdmin()
     {
         // $list_kecamatan =  Kecamatan::all();
-        return view('admin.admin-data-kecamatan', [
-            "title" => "Admin - Data Kecamatan",
+        return view('admin.admin-data-penduduk', [
+            "title" => "Admin - Data Penduduk",
         ]);
     }
 
@@ -39,7 +35,7 @@ class KecamatanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreKecamatanRequest $request)
+    public function store(StorePendudukRequest $request)
     {
         //
     }
@@ -47,7 +43,7 @@ class KecamatanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Kecamatan $kecamatan)
+    public function show(Penduduk $penduduk)
     {
         //
     }
@@ -55,7 +51,7 @@ class KecamatanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kecamatan $kecamatan)
+    public function edit(Penduduk $penduduk)
     {
         //
     }
@@ -63,7 +59,7 @@ class KecamatanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateKecamatanRequest $request, Kecamatan $kecamatan)
+    public function update(UpdatePendudukRequest $request, Penduduk $penduduk)
     {
         //
     }
@@ -71,7 +67,7 @@ class KecamatanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kecamatan $kecamatan)
+    public function destroy(Penduduk $penduduk)
     {
         //
     }

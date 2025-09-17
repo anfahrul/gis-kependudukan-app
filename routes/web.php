@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DemografiController;
 use App\Http\Controllers\KecamatanController;
+use App\Http\Controllers\PekerjaanController;
+use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +31,9 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index']);
+    Route::get('/admin-dashboard', [AdminController::class, 'index']);
     Route::post('/logout', [SessionController::class, 'logout'])->name('logout');
+    Route::get('/admin-kecamatan', [KecamatanController::class, 'indexAdmin']);
+    Route::get('/admin-jenis-pekerjaan', [PekerjaanController::class, 'indexAdmin']);
+    Route::get('/admin-penduduk', [PendudukController::class, 'indexAdmin']);
 });

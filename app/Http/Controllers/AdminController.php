@@ -9,8 +9,11 @@ class AdminController extends Controller
 {
     public function index()
     {
+        // return view('admin.admin-dashboard', [
+        //     "title" => "Admin Panel",
+        // ]);
         return view('admin.admin-dashboard', [
-            "title" => "Admin Panel",
+            "title" => "Admin - Dashboard",
         ]);
     }
 }
