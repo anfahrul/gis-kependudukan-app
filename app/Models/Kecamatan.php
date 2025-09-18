@@ -17,4 +17,9 @@ class Kecamatan extends Model
         'latitude',
         'longitude',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'kode_kecamatan';
+    }
 }

@@ -71,17 +71,36 @@ class KecamatanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kecamatan $kecamatan)
+    public function edit(Kecamatan $kode_kecamatan)
     {
-        //
+        return view('admin.admin-edit-kecamatan', [
+            "title" => "Admin - Edit Kecamatan",
+            "kecamatan" => $kode_kecamatan
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateKecamatanRequest $request, Kecamatan $kecamatan)
+    public function update(UpdateKecamatanRequest $request, Kecamatan $kode_kecamatan)
     {
-        //
+        try {
+            $data = $request->validated();
+
+            $kode_kecamatan->update([
+                'nama_kecamatan' => $data['nama_kecamatan'],
+                'latitude'       => $data['latitude'],
+                'longitude'      => $data['longitude'],
+            ]);
+
+            return redirect()->route('kecamatan.index')
+                ->with('success', 'Data kecamatan berhasil diperbarui!');
+        } catch (\Exception $e) {
+            // Jika ada error
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Gagal memperbarui kecamatan: ' . $e->getMessage());
+        }
     }
 
     /**

@@ -65,7 +65,7 @@
                                 <td class="px-6 py-3">
                                     <div class="flex">
                                         <div class="flex-1">
-                                            <a href="#"
+                                            <a href="{{ route('kecamatan.edit', $kecamatan->kode_kecamatan) }}"
                                                 class="inline-flex items-center px-2 py-1 text-sm font-small text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
                                                 <!-- Icon Info -->
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
