@@ -10,4 +10,11 @@ class Kecamatan extends Model
     /** @use HasFactory<\Database\Factories\KecamatanFactory> */
     use HasFactory;
     protected $table = 'kecamatan';
+
+    protected $fillable = [
+        'kode_kecamatan',
+        'nama_kecamatan',
+        'latitude',
+        'longitude',
+    ];
 }

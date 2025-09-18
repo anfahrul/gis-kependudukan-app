@@ -9,6 +9,10 @@
     <title>
         {{ $title }}
     </title>
+    @vite('resources/css/app.css')
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <link rel="icon" href="{{ asset('tailadmin/build/favicon.ico') }}">
     {{-- <link href="style.css" rel="stylesheet"> --}}
     <link href="{{ asset('tailadmin/build/style.css') }}" rel="stylesheet">

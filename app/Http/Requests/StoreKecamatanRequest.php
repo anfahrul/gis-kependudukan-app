@@ -11,7 +11,7 @@ class StoreKecamatanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreKecamatanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'kode_kecamatan'  => 'required|string|max:20|unique:kecamatan,kode_kecamatan',
+            'nama_kecamatan'  => 'required|string|max:255',
+            'latitude'        => 'required|numeric|between:-90,90',
+            'longitude'       => 'required|numeric|between:-180,180',
         ];
     }
 }

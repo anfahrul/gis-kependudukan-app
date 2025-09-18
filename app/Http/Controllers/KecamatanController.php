@@ -22,9 +22,10 @@ class KecamatanController extends Controller
 
     public function indexAdmin()
     {
-        // $list_kecamatan =  Kecamatan::all();
+        $list_kecamatan =  Kecamatan::all();
         return view('admin.admin-data-kecamatan', [
             "title" => "Admin - Data Kecamatan",
+            "list_kecamatan" => $list_kecamatan
         ]);
     }
 
@@ -33,7 +34,9 @@ class KecamatanController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.admin-add-kecamatan', [
+            "title" => "Admin - Add Kecamatan"
+        ]);
     }
 
     /**
@@ -41,7 +44,20 @@ class KecamatanController extends Controller
      */
     public function store(StoreKecamatanRequest $request)
     {
-        //
+        // Ambil semua input yang sudah tervalidasi
+        $data = $request->validated();
+
+        // Simpan ke database
+        Kecamatan::create([
+            'kode_kecamatan' => $data['kode_kecamatan'],
+            'nama_kecamatan' => $data['nama_kecamatan'],
+            'latitude'       => $data['latitude'],
+            'longitude'      => $data['longitude'],
+        ]);
+
+        // Redirect balik dengan pesan sukses
+        return redirect()->route('kecamatan.index')
+            ->with('success', 'Kecamatan baru berhasil ditambahkan!');
     }
 
     /**
