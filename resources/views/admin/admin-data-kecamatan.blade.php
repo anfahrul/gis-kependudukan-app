@@ -79,18 +79,24 @@
                                             </a>
                                         </div>
                                         <div class="flex-1">
-                                            <a href="#"
-                                                class="inline-flex items-center px-2 py-1 text-sm font-small text-white bg-red-600 rounded-lg shadow hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-                                                <!-- Icon Info -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="size-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M6 18 18 6M6 6l12 12" />
-                                                </svg>
+                                            <form action="{{ route('kecamatan.destroy', $kecamatan->kode_kecamatan) }}"
+                                                method="POST"
+                                                onsubmit="return confirm('Yakin ingin menghapus kecamatan ini?')">
+                                                @csrf
+                                                @method('DELETE')
 
-                                                Hapus
-                                            </a>
+
+                                                <button type="submit"
+                                                    class="inline-flex items-center px-2 py-1 text-sm font-small text-white bg-red-600 rounded-lg shadow hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="size-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M6 18 18 6M6 6l12 12" />
+                                                    </svg>
+                                                    Hapus
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
 

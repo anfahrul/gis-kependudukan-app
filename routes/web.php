@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin-kecamatan/store', [KecamatanController::class, 'store'])->name('kecamatan.store');
     Route::get('/admin-kecamatan/{kode_kecamatan}/edit', [KecamatanController::class, 'edit'])->name('kecamatan.edit');
     Route::put('/admin-kecamatan/{kode_kecamatan}', [KecamatanController::class, 'update'])->name('kecamatan.update');
+    Route::delete('/admin-kecamatan/{kode_kecamatan}', [KecamatanController::class, 'destroy'])->name('kecamatan.destroy');
 
     Route::get('/admin-jenis-pekerjaan', [PekerjaanController::class, 'indexAdmin']);
     Route::get('/admin-penduduk', [PendudukController::class, 'indexAdmin']);

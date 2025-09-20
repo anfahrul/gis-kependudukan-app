@@ -106,8 +106,11 @@ class KecamatanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kecamatan $kecamatan)
+    public function destroy(Kecamatan $kode_kecamatan)
     {
-        //
+        $kode_kecamatan->delete();
+
+        return redirect()->route('kecamatan.index')
+            ->with('success', 'Kecamatan berhasil dihapus!');
     }
 }
