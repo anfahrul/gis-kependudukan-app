@@ -45,9 +45,9 @@
                 </div>
             </div>
             <div class="max-w-full overflow-x-auto custom-scrollbar">
-                <table class="w-full text-left border-collapse">
+                <table class="w-full text-left border border-gray-800 rounded-lg overflow-hidden shadow-sm">
                     <thead>
-                        <tr class="bg-gray-800 text-gray-200">
+                        <tr class="bg-gray-200 text-gray-700">
                             <th class="px-6 py-3 text-sm font-semibold">Kode Kecamatan</th>
                             <th class="px-6 py-3 text-sm font-semibold">Nama Kecamatan</th>
                             <th class="px-6 py-3 text-sm font-semibold">Latitude</th>
@@ -55,9 +55,9 @@
                             <th class="px-6 py-3 text-sm font-semibold">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-700 bg-gray-900 text-gray-100">
+                    <tbody class="divide-y divide-gray-150 bg-white text-gray-800">
                         @foreach ($list_kecamatan as $kecamatan)
-                            <tr class="hover:bg-gray-800 transition">
+                            <tr class="hover:bg-gray-50 transition">
                                 <td class="px-6 py-3">{{ $kecamatan->kode_kecamatan }}</td>
                                 <td class="px-6 py-3">{{ $kecamatan->nama_kecamatan }}</td>
                                 <td class="px-6 py-3">{{ $kecamatan->latitude }}</td>
@@ -66,7 +66,7 @@
                                     <div class="flex">
                                         <div class="flex-1">
                                             <a href="{{ route('kecamatan.edit', $kecamatan->kode_kecamatan) }}"
-                                                class="inline-flex items-center px-2 py-1 text-sm font-small text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                                                class="inline-flex items-center px-2 py-1 text-sm font-small text-white bg-cyan-500 rounded-lg shadow hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
                                                 <!-- Icon Info -->
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -87,7 +87,7 @@
 
 
                                                 <button type="submit"
-                                                    class="inline-flex items-center px-2 py-1 text-sm font-small text-white bg-red-600 rounded-lg shadow hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                                                    class="inline-flex items-center px-2 py-1 text-sm font-small text-white bg-red-500 rounded-lg shadow hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                         class="size-6">

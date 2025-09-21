@@ -9,4 +9,8 @@ class Pekerjaan extends Model
 {
     /** @use HasFactory<\Database\Factories\PekerjaanFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'nama_pekerjaan',
+    ];
 }

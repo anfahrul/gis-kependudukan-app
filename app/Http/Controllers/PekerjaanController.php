@@ -18,9 +18,10 @@ class PekerjaanController extends Controller
 
     public function indexAdmin()
     {
-        // $list_kecamatan =  Kecamatan::all();
+        $list_pekerjaan =  Pekerjaan::all();
         return view('admin.admin-jenis-pekerjaan', [
             "title" => "Admin - Input Jenis Pekerjaan",
+            "list_pekerjaan" => $list_pekerjaan
         ]);
     }
 
@@ -29,7 +30,9 @@ class PekerjaanController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.admin-add-jenis-pekerjaan', [
+            "title" => "Admin - Add Pekerjaan"
+        ]);
     }
 
     /**
@@ -37,7 +40,17 @@ class PekerjaanController extends Controller
      */
     public function store(StorePekerjaanRequest $request)
     {
-        //
+        // Ambil semua input yang sudah tervalidasi
+        $data = $request->validated();
+
+        // Simpan ke database
+        Pekerjaan::create([
+            'nama_pekerjaan' => $data['nama_pekerjaan'],
+        ]);
+
+        // Redirect balik dengan pesan sukses
+        return redirect()->route('pekerjaan.index')
+            ->with('success', 'Pekerjaan baru berhasil ditambahkan!');
     }
 
     /**
@@ -51,24 +64,44 @@ class PekerjaanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pekerjaan $pekerjaan)
+    public function edit(Pekerjaan $id)
     {
-        //
+        return view('admin.admin-edit-jenis-pekerjaan', [
+            "title" => "Admin - Edit Pekerjaan",
+            "pekerjaan" => $id
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePekerjaanRequest $request, Pekerjaan $pekerjaan)
+    public function update(UpdatePekerjaanRequest $request, Pekerjaan $id)
     {
-        //
+        try {
+            $data = $request->validated();
+
+            $id->update([
+                'nama_pekerjaan' => $data['nama_pekerjaan'],
+            ]);
+
+            return redirect()->route('pekerjaan.index')
+                ->with('success', 'Data Pekerjaan berhasil diperbarui!');
+        } catch (\Exception $e) {
+            // Jika ada error
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Gagal memperbarui pekerjaan: ' . $e->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pekerjaan $pekerjaan)
+    public function destroy(Pekerjaan $id)
     {
-        //
+        $id->delete();
+
+        return redirect()->route('pekerjaan.index')
+            ->with('success', 'Pekerjaan berhasil dihapus!');
     }
 }

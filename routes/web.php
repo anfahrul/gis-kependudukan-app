@@ -40,7 +40,13 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/admin-kecamatan/{kode_kecamatan}', [KecamatanController::class, 'update'])->name('kecamatan.update');
     Route::delete('/admin-kecamatan/{kode_kecamatan}', [KecamatanController::class, 'destroy'])->name('kecamatan.destroy');
 
-    Route::get('/admin-jenis-pekerjaan', [PekerjaanController::class, 'indexAdmin']);
+    Route::get('/admin-jenis-pekerjaan', [PekerjaanController::class, 'indexAdmin'])->name('pekerjaan.index');
+    Route::get('/admin-jenis-pekerjaan/tambah', [PekerjaanController::class, 'create']);
+    Route::post('/admin-jenis-pekerjaan/store', [PekerjaanController::class, 'store'])->name('pekerjaan.store');
+    Route::get('/admin-jenis-pekerjaan/{id}/edit', [PekerjaanController::class, 'edit'])->name('pekerjaan.edit');
+    Route::put('/admin-jenis-pekerjaan/{id}', [PekerjaanController::class, 'update'])->name('pekerjaan.update');
+    Route::delete('/admin-jenis-pekerjaan/{id}', [PekerjaanController::class, 'destroy'])->name('pekerjaan.destroy');
+
     Route::get('/admin-penduduk', [PendudukController::class, 'indexAdmin']);
     Route::post('/logout', [SessionController::class, 'logout'])->name('logout');
 });
