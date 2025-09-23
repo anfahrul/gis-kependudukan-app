@@ -1,12 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\KeluargaController;
+use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\DemografiController;
 use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\PekerjaanController;
-use App\Http\Controllers\PendudukController;
-use App\Http\Controllers\SessionController;
-use Illuminate\Support\Facades\Route;
 
 // Route::get('/welcome', function () {
 //     return view('welcome');
@@ -47,6 +48,13 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/admin-jenis-pekerjaan/{id}', [PekerjaanController::class, 'update'])->name('pekerjaan.update');
     Route::delete('/admin-jenis-pekerjaan/{id}', [PekerjaanController::class, 'destroy'])->name('pekerjaan.destroy');
 
+    Route::get('/families/search', [KeluargaController::class, 'search'])->name('families.search'); // ajax search
+    Route::post('/families', [KeluargaController::class, 'store'])->name('families.store'); // ajax store (modal)
+
     Route::get('/admin-penduduk', [PendudukController::class, 'indexAdmin']);
+    Route::get('/penduduk/create', [PendudukController::class, 'create'])->name('penduduk.create');
+    Route::get('/penduduk/by-family/{id}', [PendudukController::class, 'byFamily']);
+    Route::post('/penduduk', [PendudukController::class, 'store'])->name('penduduk.store');
+
     Route::post('/logout', [SessionController::class, 'logout'])->name('logout');
 });

@@ -11,7 +11,7 @@ class StoreKeluargaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreKeluargaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'no_kk' => 'required|string|max:50|unique:keluargas,no_kk',
+            'alamat_rumah' => 'required|string',
+            'kecamatan_id' => 'required|exists:kecamatan,id',
         ];
     }
 }

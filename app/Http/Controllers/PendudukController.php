@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penduduk;
+use App\Models\Kecamatan;
 use App\Http\Requests\StorePendudukRequest;
 use App\Http\Requests\UpdatePendudukRequest;
 
@@ -29,7 +30,17 @@ class PendudukController extends Controller
      */
     public function create()
     {
-        //
+        $list_kecamatan =  Kecamatan::all();
+        return view('admin.admin-add-penduduk', [
+            "title" => "Admin - Add Penduduk",
+            "kecamatans" => $list_kecamatan
+        ]);
+    }
+
+    public function byFamily($id)
+    {
+        $penduduk = Penduduk::where('keluarga_id', $id)->get(['id', 'nama']);
+        return response()->json($penduduk);
     }
 
     /**
