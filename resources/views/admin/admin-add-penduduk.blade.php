@@ -56,89 +56,198 @@
             </div>
             <div class="max-w-full overflow-x-auto custom-scrollbar">
 
-                <!-- resources/views/penduduk/create.blade.php -->
-                <form action="{{ route('penduduk.store') }}" method="POST" class="space-y-4">
-                    @csrf
+                <div x-data="familySelect()" x-init="init()">
+                    <form @submit.prevent="submitPenduduk" class="space-y-4">
+                        @csrf
 
-                    <!-- other penduduk fields... -->
-
-                    <!-- Keluarga select + tombol create -->
-                    <div x-data="familySelect()" x-init="init()">
-                        <label class="block text-sm font-medium">Keluarga (No. KK)</label>
-
-                        <!-- hidden input menyimpan id -->
+                        <!-- hidden keluarga_id -->
                         <input type="hidden" name="keluarga_id" :value="selectedId">
 
-                        <!-- visible custom select (search) -->
-                        <input type="text" x-model="query" @input.debounce.300="search"
-                            placeholder="Cari no KK atau alamat..." class="w-full px-3 py-2 border rounded">
+                        <!-- ========== PILIH / TAMBAH KELUARGA ========== -->
+                        <div>
+                            <label class="block text-sm font-medium">Keluarga (Ketikkan No. KK)</label>
 
-                        <div class="mt-2">
-                            <template x-for="opt in options" :key="opt.id">
-                                <div class="p-2 hover:bg-gray-100 cursor-pointer" @click="select(opt)">
-                                    <span x-text="opt.text"></span>
-                                </div>
-                            </template>
+                            <!-- input pencarian keluarga -->
+                            <input type="text" x-model="query" @input.debounce.300="search"
+                                placeholder="Cari no KK atau alamat..." class="w-full px-3 py-2 border rounded">
 
-                            <div x-show="options.length===0 && query.length>0" class="mt-2 text-sm text-gray-500">
-                                Tidak ditemukan.
-                                <button type="button" @click="openModal" class="ml-2 text-indigo-600 underline">
-                                    + Tambah Keluarga
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Modal -->
-                        <div x-show="isModalOpen" class="fixed inset-0 flex items-center justify-center bg-black/40">
-                            <div class="bg-white p-6 rounded w-96">
-                                <h3 class="font-bold mb-3">Tambah Keluarga Baru</h3>
-
-                                <!-- input keluarga -->
-                                <div class="mb-2">
-                                    <label>No KK</label>
-                                    <input x-ref="no_kk" class="w-full border rounded px-2 py-1" required>
-                                </div>
-                                <div class="mb-2">
-                                    <label>Alamat</label>
-                                    <input x-ref="alamat" class="w-full border rounded px-2 py-1" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label>Kecamatan</label>
-                                    <select x-ref="kecamatan" class="w-full border rounded px-2 py-1" required>
-                                        @foreach ($kecamatans as $k)
-                                            <option value="{{ $k->id }}">{{ $k->nama_kecamatan }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="flex justify-end space-x-2">
-                                    <button type="button" @click="closeModal()"
-                                        class="px-3 py-1 border rounded">Batal</button>
-
-                                    <!-- PENTING: jangan submit form utama -->
-                                    <button type="button" @click="submitFamily()"
-                                        class="px-3 py-1 bg-indigo-600 text-white rounded">Simpan</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tempat tampil daftar penduduk -->
-                        <div class="mt-4" x-show="selectedId" x-cloak>
-                            <h4 class="font-bold mb-2">Daftar Penduduk</h4>
-                            <ul class="list-disc pl-5 text-sm">
-                                <template x-for="p in penduduk" :key="p.id">
-                                    <li x-text="p.nama"></li>
+                            <div class="mt-2">
+                                <template x-for="opt in options" :key="opt.id">
+                                    <div class="p-2 hover:bg-gray-100 cursor-pointer" @click="select(opt)">
+                                        <span x-text="opt.text"></span>
+                                    </div>
                                 </template>
-                            </ul>
+
+                                <!-- tombol tambah keluarga -->
+                                <div x-show="options.length===0 && query.length>0 && !selectedId"
+                                    class="mt-2 text-sm text-gray-500">
+                                    Tidak ditemukan.
+                                    <button type="button" @click="openModal" class="ml-2 text-indigo-600 underline">
+                                        + Tambah Keluarga
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Modal Tambah Keluarga -->
+                            <div x-show="isModalOpen"
+                                class="fixed inset-0 flex items-center justify-center bg-black/40">
+                                <div class="bg-white p-6 rounded w-96">
+                                    <h3 class="font-bold mb-3">Tambah Keluarga Baru</h3>
+
+                                    {{-- <div class="mb-2">
+                                        <label>No KK</label>
+                                        <input x-ref="no_kk" class="w-full border rounded px-2 py-1" required>
+                                    </div> --}}
+                                    <div class="mb-2">
+                                        <label>No KK</label>
+                                        <input name="modal_no_kk" x-ref="no_kk" class="w-full border rounded px-2 py-1"
+                                            required :disabled="true">
+                                    </div>
+
+                                    {{-- <div class="mb-2">
+                                        <label>Alamat</label>
+                                        <input x-ref="alamat" class="w-full border rounded px-2 py-1" required>
+                                    </div> --}}
+                                    <div class="mb-3">
+                                        <label>Kecamatan</label>
+                                        <select name="modal_kecamatan" x-ref="kecamatan"
+                                            class="w-full border rounded px-2 py-1" required :disabled="true">
+                                            @foreach ($kecamatans as $k)
+                                                <option value="{{ $k->id }}">{{ $k->nama_kecamatan }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label>Kecamatan</label>
+                                        <select x-ref="kecamatan" class="w-full border rounded px-2 py-1" required>
+                                            @foreach ($kecamatans as $k)
+                                                <option value="{{ $k->id }}">{{ $k->nama_kecamatan }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="flex justify-end space-x-2">
+                                        <button type="button" @click="closeModal()"
+                                            class="px-3 py-1 border rounded">Batal</button>
+                                        <button type="button" @click="submitFamily()"
+                                            class="px-3 py-1 bg-indigo-600 text-white rounded">Simpan</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- ========== FORM PENDUDUK ========== -->
+                        <div x-show="selectedId" x-cloak>
+                            <!-- input nama -->
+                            <div>
+                                <label class="block text-sm font-medium">Nama Penduduk</label>
+                                <input x-model="formPenduduk.nama" type="text"
+                                    class="w-full px-3 py-2 border rounded" required>
+                            </div>
+
+                            <!-- input NIK -->
+                            <div>
+                                <label class="block text-sm font-medium">NIK</label>
+                                <input x-model="formPenduduk.nik" type="text" class="w-full px-3 py-2 border rounded"
+                                    required>
+                            </div>
+
+                            <!-- jenis kelamin -->
+                            <div>
+                                <label class="block text-sm font-medium">Jenis Kelamin</label>
+                                <select x-model="formPenduduk.jenis_kelamin" class="w-full px-3 py-2 border rounded"
+                                    required>
+                                    <option value="" disabled selected>-- Pilih Jenis Kelamin --</option>
+                                    <option value="L">Laki-laki</option>
+                                    <option value="P">Perempuan</option>
+                                </select>
+                            </div>
+
+                            <!-- tanggal lahir -->
+                            <div>
+                                <label class="block text-sm font-medium">Tanggal Lahir</label>
+                                <input x-model="formPenduduk.tanggal_lahir" type="date"
+                                    class="w-full px-3 py-2 border rounded" required>
+                            </div>
+
+                            <!-- agama -->
+                            <div>
+                                <label class="block text-sm font-medium">Agama</label>
+                                <select x-model="formPenduduk.agama" class="w-full px-3 py-2 border rounded">
+                                    <option value="" disabled selected>-- Pilih Agama --</option>
+                                    <template x-for="a in ['Islam','Protestan','Katolik','Hindu','Buddha','Konghucu']"
+                                        :key="a">
+                                        <option :value="a" x-text="a"></option>
+                                    </template>
+                                </select>
+                            </div>
+
+                            <!-- golongan darah -->
+                            <div>
+                                <label class="block text-sm font-medium">Golongan Darah</label>
+                                <select x-model="formPenduduk.golongan_darah" class="w-full px-3 py-2 border rounded">
+                                    <option value="" disabled selected>-- Pilih Golongan Darah --</option>
+                                    <template x-for="gd in ['A','B','AB','O']" :key="gd">
+                                        <option :value="gd" x-text="gd"></option>
+                                    </template>
+                                </select>
+                            </div>
+
+                            <!-- pekerjaan -->
+                            <div>
+                                <label class="block text-sm font-medium">Pekerjaan</label>
+                                <select x-model="formPenduduk.pekerjaan_id" class="w-full px-3 py-2 border rounded"
+                                    required>
+                                    <option value="" disabled selected>-- Pilih Pekerjaan --</option>
+                                    <template x-for="p in pekerjaanList" :key="p.id">
+                                        <option :value="p.id" x-text="p.nama"></option>
+                                    </template>
+                                </select>
+                            </div>
+
+                            <!-- pendidikan -->
+                            <div>
+                                <label class="block text-sm font-medium">Pendidikan</label>
+                                <select x-model="formPenduduk.pendidikan" class="w-full px-3 py-2 border rounded">
+                                    <option value="" disabled selected>-- Pilih Pendidikan --</option>
+                                    <template x-for="pd in pendidikanList" :key="pd">
+                                        <option :value="pd" x-text="pd"></option>
+                                    </template>
+                                </select>
+                            </div>
+
+                            <!-- peran dalam keluarga -->
+                            <div>
+                                <label class="block text-sm font-medium">Peran dalam Keluarga</label>
+                                <select x-model="formPenduduk.peran_dalam_keluarga"
+                                    class="w-full px-3 py-2 border rounded">
+                                    <option value="" disabled selected>-- Pilih Peran --</option>
+                                    <template x-for="r in ['Kepala Keluarga','Istri','Anak','Lainnya']"
+                                        :key="r">
+                                        <option :value="r" x-text="r"></option>
+                                    </template>
+                                </select>
+                            </div>
+
+                            <!-- tombol simpan penduduk -->
+                            <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded">
+                                Simpan Penduduk
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- daftar penduduk -->
+                    <div class="mt-4" x-show="selectedId" x-cloak>
+                        <h4 class="font-bold mb-2">Daftar Penduduk</h4>
+                        <p>Berikut Daftar Penduduk pada Keluarga dengan No. KK</p>
+                        <ul class="list-disc pl-5 text-sm">
+                            <template x-for="p in penduduk" :key="p.id">
+                                <li x-text="p.nama"></li>
+                            </template>
+                        </ul>
                     </div>
-
-                    <!-- tombol simpan penduduk -->
-                    <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded">
-                        Simpan Penduduk
-                    </button>
-                </form>
-
+                </div>
 
             </div>
         </div>
@@ -151,28 +260,56 @@
                 options: [],
                 selectedId: null,
                 isModalOpen: false,
-                init() {},
+                penduduk: [],
+                pekerjaanList: [],
+                pendidikanList: [
+                    'PAUD', 'SD Sederajat', 'SMP Sederajat', 'SMA/SMK Sederajat',
+                    'D1', 'D2', 'D3', 'D4', 'S1', 'S2', 'S3'
+                ],
+                formPenduduk: {
+                    keluarga_id: null,
+                    nama: '',
+                    nik: '',
+                    jenis_kelamin: '',
+                    tanggal_lahir: '',
+                    agama: '',
+                    golongan_darah: '',
+                    pekerjaan_id: '',
+                    pendidikan: '',
+                    peran_dalam_keluarga: ''
+                },
+
+                init() {
+                    fetch('/api/pekerjaan')
+                        .then(res => res.json())
+                        .then(data => this.pekerjaanList = data)
+                        .catch(() => this.pekerjaanList = []);
+                },
+
                 async search() {
                     if (this.query.length < 2) {
                         this.options = [];
                         return;
                     }
                     const res = await fetch(`{{ route('families.search') }}?q=` + encodeURIComponent(this.query));
-                    const data = await res.json();
-                    this.options = data;
+                    this.options = await res.json();
                 },
+
                 select(opt) {
                     this.selectedId = opt.id;
                     this.query = opt.text;
                     this.options = [];
+                    this.formPenduduk.keluarga_id = opt.id;
                     this.loadPenduduk();
                 },
+
                 openModal() {
-                    this.isModalOpen = true;
+                    this.isModalOpen = true
                 },
                 closeModal() {
-                    this.isModalOpen = false;
+                    this.isModalOpen = false
                 },
+
                 async submitFamily() {
                     try {
                         const formData = new FormData();
@@ -188,29 +325,14 @@
                             body: formData
                         });
 
-                        if (res.status === 422) {
-                            const err = await res.json();
-                            alert(Object.values(err.errors || {
-                                error: 'Validasi gagal'
-                            }).flat().join("\n"));
-                            return;
-                        }
-
-                        if (!res.ok) {
-                            // tampilkan error dari server jika ada
-                            const text = await res.text();
-                            console.error('Server error:', text);
-                            alert('Terjadi kesalahan: ' + res.status);
-                            return;
-                        }
-
                         const json = await res.json();
                         if (json.success) {
                             this.selectedId = json.data.id;
                             this.query = json.data.text;
+                            this.formPenduduk.keluarga_id = json.data.id;
                             this.closeModal();
+                            this.loadPenduduk();
                             alert('Keluarga baru berhasil ditambahkan');
-                            this.loadPenduduk(); // load penduduk (kosong untuk keluarga baru)
                         } else {
                             alert('Gagal menyimpan keluarga');
                         }
@@ -221,35 +343,60 @@
                 },
 
                 async loadPenduduk() {
-                    // if (!this.selectedId) return;
-
-                    // const res = await fetch(`/penduduk/by-family/${this.selectedId}`);
-                    // const data = await res.json();
-
-
-                    // // render ke <ul>
-                    // if (!this.$refs.pendudukList) return;
-                    // this.$refs.pendudukList.innerHTML = '';
-                    // if (data.length === 0) {
-                    //     this.$refs.pendudukList.innerHTML = '<li class="text-gray-500">Belum ada penduduk</li>';
-                    // } else {
-                    //     data.forEach(p => {
-                    //         console.log(p);
-                    //         const li = document.createElement('li');
-                    //         li.textContent = p.nama;
-                    //         this.$refs.pendudukList.appendChild(li);
-                    //     });
-                    // }
-
                     if (!this.selectedId) return;
-
                     const res = await fetch(`/penduduk/by-family/${this.selectedId}`);
-                    this.penduduk = await res.json(); // simpan ke state Alpine
-                }
+                    this.penduduk = await res.json();
+                },
 
+                async submitPenduduk() {
+                    try {
+                        this.formPenduduk.keluarga_id = this.selectedId;
+
+                        const formData = new FormData();
+                        for (const key in this.formPenduduk) {
+                            formData.append(key, this.formPenduduk[key]);
+                        }
+
+                        const res = await fetch('/penduduk', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify(this.formPenduduk)
+                        });
+
+
+                        const json = await res.json();
+                        if (json.success) {
+                            this.penduduk.push(json.data);
+                            alert('Penduduk berhasil ditambahkan');
+                            // reset form
+                            this.formPenduduk = {
+                                keluarga_id: this.selectedId,
+                                nama: '',
+                                nik: '',
+                                jenis_kelamin: 'L',
+                                tanggal_lahir: '',
+                                agama: 'Islam',
+                                golongan_darah: 'A',
+                                pekerjaan_id: '',
+                                pendidikan: 'SD Sederajat',
+                                peran_dalam_keluarga: 'Lainnya'
+                            };
+                        } else {
+                            alert('Gagal menyimpan penduduk');
+                        }
+                    } catch (err) {
+                        console.error(err);
+                        alert('Terjadi kesalahan jaringan.');
+                    }
+                }
             }
         }
     </script>
+
 
     </div>
     </div>

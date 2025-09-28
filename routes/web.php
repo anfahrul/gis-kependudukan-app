@@ -56,5 +56,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/penduduk/by-family/{id}', [PendudukController::class, 'byFamily']);
     Route::post('/penduduk', [PendudukController::class, 'store'])->name('penduduk.store');
 
+
+    Route::get('/api/pekerjaan', function () {
+        return \App\Models\Pekerjaan::select('id', 'nama_pekerjaan as nama')->get();
+    });
+
     Route::post('/logout', [SessionController::class, 'logout'])->name('logout');
 });

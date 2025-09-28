@@ -6,6 +6,7 @@ use App\Models\Penduduk;
 use App\Models\Kecamatan;
 use App\Http\Requests\StorePendudukRequest;
 use App\Http\Requests\UpdatePendudukRequest;
+use Illuminate\Http\Request;
 
 class PendudukController extends Controller
 {
@@ -46,10 +47,56 @@ class PendudukController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePendudukRequest $request)
+    // public function store(Request $request)
+    // {
+    //     $validated = $request->validate([
+    //         'keluarga_id' => 'required|exists:keluargas,id',
+    //         'nama' => 'required|string|max:100',
+    //         'nik' => 'required|string|max:50|unique:penduduks,nik',
+    //         'jenis_kelamin' => 'required|in:L,P',
+    //         'tanggal_lahir' => 'required|date',
+    //         'agama' => 'required|in:Islam,Protestan,Katolik,Hindu,Buddha,Konghucu',
+    //         'golongan_darah' => 'required|in:A,B,AB,O',
+    //         'pekerjaan_id' => 'required|exists:pekerjaans,id',
+    //         'pendidikan' => 'required',
+    //         'peran_dalam_keluarga' => 'required|in:Kepala Keluarga,Istri,Anak,Lainnya',
+    //     ]);
+
+    //     $penduduk = Penduduk::create($validated);
+
+    //     return response()->json([
+    //         'success' => true,
+    //         'data' => $penduduk
+    //     ]);
+    // }
+
+    public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'keluarga_id' => 'required|exists:keluargas,id',
+            'nama' => 'required|string|max:100',
+            'nik' => 'required|string|max:50|unique:penduduks,nik',
+            'jenis_kelamin' => 'required|in:L,P',
+            'tanggal_lahir' => 'required|date',
+            'agama' => 'required|in:Islam,Protestan,Katolik,Hindu,Buddha,Konghucu',
+            'golongan_darah' => 'required|in:A,B,AB,O',
+            'pekerjaan_id' => 'required|exists:pekerjaans,id',
+            'pendidikan' => 'required',
+            'peran_dalam_keluarga' => 'required|in:Kepala Keluarga,Istri,Anak,Lainnya',
+        ]);
+
+        $penduduk = Penduduk::create($validated);
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $penduduk
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Penduduk berhasil ditambahkan');
     }
+
 
     /**
      * Display the specified resource.
