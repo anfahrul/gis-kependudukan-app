@@ -94,39 +94,31 @@
                                 <div class="bg-white p-6 rounded w-96">
                                     <h3 class="font-bold mb-3">Tambah Keluarga Baru</h3>
 
-                                    {{-- <div class="mb-2">
-                                        <label>No KK</label>
-                                        <input x-ref="no_kk" class="w-full border rounded px-2 py-1" required>
-                                    </div> --}}
+                                    <!-- No KK -->
                                     <div class="mb-2">
                                         <label>No KK</label>
-                                        <input name="modal_no_kk" x-ref="no_kk" class="w-full border rounded px-2 py-1"
-                                            required :disabled="true">
+                                        <input name="modal_no_kk" x-ref="no_kk"
+                                            class="w-full border rounded px-2 py-1">
                                     </div>
 
-                                    {{-- <div class="mb-2">
-                                        <label>Alamat</label>
-                                        <input x-ref="alamat" class="w-full border rounded px-2 py-1" required>
-                                    </div> --}}
+                                    <!-- Alamat Rumah -->
+                                    <div class="mb-2">
+                                        <label>Alamat Rumah</label>
+                                        <textarea name="modal_alamat" x-ref="alamat_rumah" class="w-full border rounded px-2 py-1"></textarea>
+                                    </div>
+
+                                    <!-- Kecamatan -->
                                     <div class="mb-3">
                                         <label>Kecamatan</label>
                                         <select name="modal_kecamatan" x-ref="kecamatan"
-                                            class="w-full border rounded px-2 py-1" required :disabled="true">
+                                            class="w-full border rounded px-2 py-1" required>
                                             @foreach ($kecamatans as $k)
                                                 <option value="{{ $k->id }}">{{ $k->nama_kecamatan }}</option>
                                             @endforeach
                                         </select>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label>Kecamatan</label>
-                                        <select x-ref="kecamatan" class="w-full border rounded px-2 py-1" required>
-                                            @foreach ($kecamatans as $k)
-                                                <option value="{{ $k->id }}">{{ $k->nama_kecamatan }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
+                                    <!-- Tombol -->
                                     <div class="flex justify-end space-x-2">
                                         <button type="button" @click="closeModal()"
                                             class="px-3 py-1 border rounded">Batal</button>
@@ -135,6 +127,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                         <!-- ========== FORM PENDUDUK ========== -->
@@ -231,7 +224,10 @@
                             </div>
 
                             <!-- tombol simpan penduduk -->
-                            <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded">
+                            <button type="submit"
+                                class="mt-3 px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg 
+                    hover:from-blue-700 hover:to-indigo-700 transform hover:-translate-y-0.5 transition duration-300 ease-in-out 
+                    focus:outline-none focus:ring-4 focus:ring-indigo-400">
                                 Simpan Penduduk
                             </button>
                         </div>
@@ -240,12 +236,47 @@
                     <!-- daftar penduduk -->
                     <div class="mt-4" x-show="selectedId" x-cloak>
                         <h4 class="font-bold mb-2">Daftar Penduduk</h4>
-                        <p>Berikut Daftar Penduduk pada Keluarga dengan No. KK</p>
-                        <ul class="list-disc pl-5 text-sm">
-                            <template x-for="p in penduduk" :key="p.id">
-                                <li x-text="p.nama"></li>
-                            </template>
-                        </ul>
+                        <p>
+                            Berikut Daftar Penduduk pada Keluarga dengan No. KK ini.
+                        </p>
+                        <table class="w-full text-sm border mt-2">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="border px-2 py-1">Nama</th>
+                                    <th class="border px-2 py-1">NIK</th>
+                                    <th class="border px-2 py-1">Jenis Kelamin</th>
+                                    <th class="border px-2 py-1">Tanggal Lahir</th>
+                                    <th class="border px-2 py-1">Agama</th>
+                                    <th class="border px-2 py-1">Gol. Darah</th>
+                                    <th class="border px-2 py-1">Pendidikan</th>
+                                    <th class="border px-2 py-1">Pekerjaan</th>
+                                    <th class="border px-2 py-1">Peran</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- jika ada penduduk -->
+                                <template x-for="p in penduduk" :key="p.id">
+                                    <tr>
+                                        <td class="border px-2 py-1" x-text="p.nama"></td>
+                                        <td class="border px-2 py-1" x-text="p.nik"></td>
+                                        <td class="border px-2 py-1" x-text="p.jenis_kelamin"></td>
+                                        <td class="border px-2 py-1" x-text="p.tanggal_lahir"></td>
+                                        <td class="border px-2 py-1" x-text="p.agama"></td>
+                                        <td class="border px-2 py-1" x-text="p.golongan_darah"></td>
+                                        <td class="border px-2 py-1" x-text="p.pendidikan"></td>
+                                        <td class="border px-2 py-1" x-text="p.pekerjaan"></td>
+                                        <td class="border px-2 py-1" x-text="p.peran_dalam_keluarga"></td>
+                                    </tr>
+                                </template>
+
+                                <!-- jika tidak ada penduduk -->
+                                <tr x-show="penduduk.length === 0">
+                                    <td colspan="9" class="text-center text-gray-500 py-2">
+                                        Belum ada penduduk yang terdaftar pada No. KK ini.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
@@ -312,9 +343,14 @@
 
                 async submitFamily() {
                     try {
+                        if (!this.$refs.no_kk.value || !this.$refs.alamat_rumah.value) {
+                            alert('No KK dan Alamat wajib diisi');
+                            return;
+                        }
+
                         const formData = new FormData();
                         formData.append('no_kk', this.$refs.no_kk.value);
-                        formData.append('alamat_rumah', this.$refs.alamat.value);
+                        formData.append('alamat_rumah', this.$refs.alamat_rumah.value);
                         formData.append('kecamatan_id', this.$refs.kecamatan.value);
 
                         const res = await fetch('{{ route('families.store') }}', {
@@ -372,6 +408,7 @@
                         if (json.success) {
                             this.penduduk.push(json.data);
                             alert('Penduduk berhasil ditambahkan');
+                            this.loadPenduduk();
                             // reset form
                             this.formPenduduk = {
                                 keluarga_id: this.selectedId,

@@ -22,4 +22,9 @@ class Penduduk extends Model
         'pekerjaan_id',
         'peran_dalam_keluarga',
     ];
+
+    public function pekerjaan()
+    {
+        return $this->belongsTo(Pekerjaan::class);
+    }
 }

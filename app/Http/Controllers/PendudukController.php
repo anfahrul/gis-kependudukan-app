@@ -38,37 +38,51 @@ class PendudukController extends Controller
         ]);
     }
 
+    // public function byFamily($id)
+    // {
+    //     $penduduk = Penduduk::where('keluarga_id', $id)->get(['id', 'nama']);
+    //     return response()->json($penduduk);
+    // }
     public function byFamily($id)
     {
-        $penduduk = Penduduk::where('keluarga_id', $id)->get(['id', 'nama']);
+        $penduduk = Penduduk::with('pekerjaan') // relasi ke tabel pekerjaan
+            ->where('keluarga_id', $id)
+            ->get([
+                'id',
+                'nama',
+                'nik',
+                'jenis_kelamin',
+                'tanggal_lahir',
+                'agama',
+                'golongan_darah',
+                'pekerjaan_id',
+                'pendidikan',
+                'peran_dalam_keluarga',
+            ]);
+
+        // ubah pekerjaan_id jadi nama pekerjaan biar langsung kebaca
+        $penduduk->transform(function ($item) {
+            return [
+                'id' => $item->id,
+                'nama' => $item->nama,
+                'nik' => $item->nik,
+                'jenis_kelamin' => $item->jenis_kelamin,
+                'tanggal_lahir' => $item->tanggal_lahir,
+                'agama' => $item->agama,
+                'golongan_darah' => $item->golongan_darah,
+                'pendidikan' => $item->pendidikan,
+                'peran_dalam_keluarga' => $item->peran_dalam_keluarga,
+                'pekerjaan' => $item->pekerjaan ? $item->pekerjaan->nama_pekerjaan : null,
+            ];
+        });
+
         return response()->json($penduduk);
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(Request $request)
-    // {
-    //     $validated = $request->validate([
-    //         'keluarga_id' => 'required|exists:keluargas,id',
-    //         'nama' => 'required|string|max:100',
-    //         'nik' => 'required|string|max:50|unique:penduduks,nik',
-    //         'jenis_kelamin' => 'required|in:L,P',
-    //         'tanggal_lahir' => 'required|date',
-    //         'agama' => 'required|in:Islam,Protestan,Katolik,Hindu,Buddha,Konghucu',
-    //         'golongan_darah' => 'required|in:A,B,AB,O',
-    //         'pekerjaan_id' => 'required|exists:pekerjaans,id',
-    //         'pendidikan' => 'required',
-    //         'peran_dalam_keluarga' => 'required|in:Kepala Keluarga,Istri,Anak,Lainnya',
-    //     ]);
-
-    //     $penduduk = Penduduk::create($validated);
-
-    //     return response()->json([
-    //         'success' => true,
-    //         'data' => $penduduk
-    //     ]);
-    // }
 
     public function store(Request $request)
     {
