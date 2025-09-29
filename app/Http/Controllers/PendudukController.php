@@ -20,9 +20,10 @@ class PendudukController extends Controller
 
     public function indexAdmin()
     {
-        // $list_kecamatan =  Kecamatan::all();
+        $list_penduduk =  Penduduk::all();
         return view('admin.admin-data-penduduk', [
             "title" => "Admin - Data Penduduk",
+            "list_penduduk" => $list_penduduk
         ]);
     }
 
@@ -38,11 +39,6 @@ class PendudukController extends Controller
         ]);
     }
 
-    // public function byFamily($id)
-    // {
-    //     $penduduk = Penduduk::where('keluarga_id', $id)->get(['id', 'nama']);
-    //     return response()->json($penduduk);
-    // }
     public function byFamily($id)
     {
         $penduduk = Penduduk::with('pekerjaan') // relasi ke tabel pekerjaan
