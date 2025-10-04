@@ -11,7 +11,7 @@ class UpdatePendudukRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,20 @@ class UpdatePendudukRequest extends FormRequest
      */
     public function rules(): array
     {
+        $penduduk = $this->route('penduduk');
+        $pendudukId = $penduduk instanceof \App\Models\Penduduk ? $penduduk->id : $penduduk;
+
         return [
-            //
+            'keluarga_id'   => 'required|exists:keluargas,id',
+            'nama'          => 'required|string|max:100',
+            'nik'           => 'required|string|max:50|unique:penduduks,nik,' . $pendudukId . ',id',
+            'jenis_kelamin' => 'required|in:L,P',
+            'tanggal_lahir' => 'required|date',
+            'agama'         => 'required|in:Islam,Protestan,Katolik,Hindu,Buddha,Konghucu',
+            'golongan_darah'    => 'required|in:A,B,AB,O',
+            'pekerjaan_id'  => 'required|exists:pekerjaans,id',
+            'pendidikan'    => 'required',
+            'peran_dalam_keluarga' => 'required|in:Kepala Keluarga,Istri,Anak,Lainnya',
         ];
     }
 }

@@ -51,11 +51,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/families/search', [KeluargaController::class, 'search'])->name('families.search'); // ajax search
     Route::post('/families', [KeluargaController::class, 'store'])->name('families.store'); // ajax store (modal)
 
-    Route::get('/admin-penduduk', [PendudukController::class, 'indexAdmin']);
+    Route::get('/admin-penduduk', [PendudukController::class, 'indexAdmin'])->name('penduduk.index');
     Route::get('/penduduk/create', [PendudukController::class, 'create'])->name('penduduk.create');
     Route::get('/penduduk/by-family/{id}', [PendudukController::class, 'byFamily']);
     Route::post('/penduduk', [PendudukController::class, 'store'])->name('penduduk.store');
-
+    Route::get('/admin-penduduk/{penduduk}/edit', [PendudukController::class, 'edit'])->name('penduduk.edit');
+    Route::put('/admin-penduduk/{penduduk}', [PendudukController::class, 'update'])->name('penduduk.update');
+    Route::delete('/admin-penduduk/{penduduk}', [PendudukController::class, 'destroy'])->name('penduduk.destroy');
 
     Route::get('/api/pekerjaan', function () {
         return \App\Models\Pekerjaan::select('id', 'nama_pekerjaan as nama')->get();

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Kecamatan;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Keluarga extends Model
 {
@@ -15,4 +16,14 @@ class Keluarga extends Model
         'alamat_rumah',
         'kecamatan_id'
     ];
+
+    public function kecamatan()
+    {
+        return $this->belongsTo(Kecamatan::class);
+    }
+
+    public function penduduks()
+    {
+        return $this->hasMany(Penduduk::class, 'keluarga_id');
+    }
 }

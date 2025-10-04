@@ -44,11 +44,12 @@
                     </div>
                 </div>
             </div>
-            <div class="max-w-full overflow-x-auto custom-scrollbar">
-                <table class="w-full text-sm border mt-2">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm border mt-2 min-w-max mt-2">
                     <thead class="bg-gray-100">
                         <tr class="bg-gray-200 text-gray-700">
                             <th class="border px-2 py-1">NIK</th>
+                            <th class="border px-2 py-1">No. KK</th>
                             <th class="border px-2 py-1">Nama</th>
                             <th class="border px-2 py-1">Jenis Kelamin</th>
                             <th class="border px-2 py-1">Tanggal Lahir</th>
@@ -64,6 +65,7 @@
                         @foreach ($list_penduduk as $penduduk)
                             <tr class="hover:bg-gray-50 transition">
                                 <td class="border px-2 py-1">{{ $penduduk->nik }}</td>
+                                <td class="border px-2 py-1">{{ $penduduk->keluarga->no_kk }}</td>
                                 <td class="border px-2 py-1">{{ $penduduk->nama }}</td>
                                 <td class="border px-2 py-1">{{ $penduduk->jenis_kelamin }}</td>
                                 <td class="border px-2 py-1">{{ $penduduk->tanggal_lahir }}</td>
@@ -72,11 +74,10 @@
                                 <td class="border px-2 py-1">{{ $penduduk->pendidikan }}</td>
                                 <td class="border px-2 py-1">{{ $penduduk->pekerjaan->nama_pekerjaan }}</td>
                                 <td class="border px-2 py-1">{{ $penduduk->peran_dalam_keluarga }}</td>
-                                <td class="border px-2 py-1">dummy</td>
-                                {{-- <td class="px-6 py-3">
+                                <td class="px-6 py-3">
                                     <div class="flex">
                                         <div class="flex-1">
-                                            <a href="{{ route('kecamatan.edit', $kecamatan->kode_kecamatan) }}"
+                                            <a href="{{ route('penduduk.edit', $penduduk->id) }}"
                                                 class="inline-flex items-center px-2 py-1 text-sm font-small text-white bg-cyan-500 rounded-lg shadow hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
                                                 <!-- Icon Info -->
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -89,10 +90,10 @@
                                                 Edit
                                             </a>
                                         </div>
-                                        <div class="flex-1">
-                                            <form action="{{ route('kecamatan.destroy', $kecamatan->kode_kecamatan) }}"
+                                        <div class="flex-1 ml-2">
+                                            <form action="{{ route('penduduk.destroy', $penduduk->id) }}"
                                                 method="POST"
-                                                onsubmit="return confirm('Yakin ingin menghapus kecamatan ini?')">
+                                                onsubmit="return confirm('Yakin ingin menghapus penduduk ini?')">
                                                 @csrf
                                                 @method('DELETE')
 
@@ -111,7 +112,7 @@
                                         </div>
                                     </div>
 
-                                </td> --}}
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

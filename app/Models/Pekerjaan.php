@@ -13,4 +13,9 @@ class Pekerjaan extends Model
     protected $fillable = [
         'nama_pekerjaan',
     ];
+
+    public function penduduks()
+    {
+        return $this->hasMany(Penduduk::class, 'pekerjaan_id');
+    }
 }

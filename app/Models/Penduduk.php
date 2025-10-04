@@ -27,4 +27,9 @@ class Penduduk extends Model
     {
         return $this->belongsTo(Pekerjaan::class);
     }
+
+    public function keluarga()
+    {
+        return $this->belongsTo(Keluarga::class, 'keluarga_id');
+    }
 }

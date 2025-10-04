@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Keluarga;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Kecamatan extends Model
 {
@@ -21,5 +22,10 @@ class Kecamatan extends Model
     public function getRouteKeyName()
     {
         return 'kode_kecamatan';
+    }
+
+    public function keluargas()
+    {
+        return $this->hasMany(Keluarga::class);
     }
 }

@@ -6,6 +6,8 @@ use App\Models\Penduduk;
 use App\Models\Kecamatan;
 use App\Http\Requests\StorePendudukRequest;
 use App\Http\Requests\UpdatePendudukRequest;
+use App\Models\Keluarga;
+use App\Models\Pekerjaan;
 use Illuminate\Http\Request;
 
 class PendudukController extends Controller
@@ -20,7 +22,8 @@ class PendudukController extends Controller
 
     public function indexAdmin()
     {
-        $list_penduduk =  Penduduk::all();
+        // $list_penduduk =  Penduduk::all();
+        $list_penduduk =  Penduduk::with('keluarga')->get();
         return view('admin.admin-data-penduduk', [
             "title" => "Admin - Data Penduduk",
             "list_penduduk" => $list_penduduk
@@ -121,7 +124,15 @@ class PendudukController extends Controller
      */
     public function edit(Penduduk $penduduk)
     {
-        //
+        $list_pekerjaan =  Pekerjaan::all();
+        $list_keluarga =  Keluarga::with('kecamatan')->get();
+
+        return view('admin.admin-edit-penduduk', [
+            "title" => "Admin - Edit Penduduk",
+            "penduduk" => $penduduk,
+            "pekerjaans" => $list_pekerjaan,
+            "keluargas" => $list_keluarga
+        ]);
     }
 
     /**
@@ -129,7 +140,30 @@ class PendudukController extends Controller
      */
     public function update(UpdatePendudukRequest $request, Penduduk $penduduk)
     {
-        //
+        try {
+            $data = $request->validated();
+
+            $penduduk->update([
+                'keluarga_id'           => $data['keluarga_id'],
+                'nama'                  => $data['nama'],
+                'nik'                   => $data['nik'],
+                'jenis_kelamin'         => $data['jenis_kelamin'],
+                'tanggal_lahir'         => $data['tanggal_lahir'],
+                'agama'                 => $data['agama'],
+                'golongan_darah'        => $data['golongan_darah'],
+                'pekerjaan_id'          => $data['pekerjaan_id'],
+                'pendidikan'            => $data['pendidikan'],
+                'peran_dalam_keluarga'  => $data['peran_dalam_keluarga'],
+            ]);
+
+            return redirect()->route('penduduk.index')
+                ->with('success', 'Data penduduk berhasil diperbarui!');
+        } catch (\Exception $e) {
+            // Jika ada error
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Gagal memperbarui penduduk: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -137,6 +171,9 @@ class PendudukController extends Controller
      */
     public function destroy(Penduduk $penduduk)
     {
-        //
+        $penduduk->delete();
+
+        return redirect()->route('penduduk.index')
+            ->with('success', 'Penduduk berhasil dihapus!');
     }
 }
