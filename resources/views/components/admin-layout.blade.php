@@ -167,8 +167,8 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                             <!-- Menu Item Profile -->
                             <li>
                                 <a href="/admin-profile"
-                                    class="menu-item group {{ Request::is('profile') ? 'menu-item-active' : 'menu-item-inactive' }}">
-                                    <svg class="{{ Request::is('profile') ? 'menu-item-icon-active' : 'menu-item-icon-inactive' }}"
+                                    class="menu-item group {{ Request::is('admin-profile') ? 'menu-item-active' : 'menu-item-inactive' }}">
+                                    <svg class="{{ Request::is('admin-profile') ? 'menu-item-icon-active' : 'menu-item-icon-inactive' }}"
                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -180,6 +180,25 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                                     </span>
                                 </a>
                             </li>
+                            @auth
+                                @if (Auth::user()->role === 'administrator')
+                                    <li>
+                                        <a href="/admin-acc-manage"
+                                            class="menu-item group {{ Request::is('admin-acc-manage') ? 'menu-item-active' : 'menu-item-inactive' }}">
+                                            <svg class="{{ Request::is('admin-acc-manage') ? 'menu-item-icon-active' : 'menu-item-icon-inactive' }}"
+                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                                            </svg>
+
+                                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">
+                                                Manajemen Akun Staff
+                                            </span>
+                                        </a>
+                                    </li>
+                                @endif
+                            @endauth
                         </ul>
                     </div>
                 </nav>

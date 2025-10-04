@@ -66,6 +66,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin-profile', [UserController::class, 'index'])->name('admin-profile.index');
     Route::put('/admin-profile/update-password', [UserController::class, 'updatePassword'])->name('admin-profile.updatePassword');
-
     Route::post('/logout', [SessionController::class, 'logout'])->name('logout');
+});
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin-acc-manage', [UserController::class, 'indexAccManage'])->name('admin-acc-manage.index');
+    Route::get('/admin-acc-manage/create', [UserController::class, 'createAcc'])->name('admin-acc-manage.create');
+    Route::post('/admin-acc-manage/store', [UserController::class, 'storeAcc'])->name('admin-acc-manage.store');
+    // Route::get('/admin-acc-manage/{users}/edit', [UserController::class, 'editAcc'])->name('admin-acc-manage.edit');
+    // Route::put('/admin-acc-manage/{users}', [UserController::class, 'updateAcc'])->name('admin-acc-manage.update');
+    Route::delete('/admin-acc-manage/{user}', [UserController::class, 'destroyAcc'])->name('admin-acc-manage.destroy');
 });
