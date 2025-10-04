@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\KeluargaController;
@@ -62,6 +63,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/api/pekerjaan', function () {
         return \App\Models\Pekerjaan::select('id', 'nama_pekerjaan as nama')->get();
     });
+
+    Route::get('/admin-profile', [UserController::class, 'index'])->name('admin-profile.index');
+    Route::put('/admin-profile/update-password', [UserController::class, 'updatePassword'])->name('admin-profile.updatePassword');
 
     Route::post('/logout', [SessionController::class, 'logout'])->name('logout');
 });
