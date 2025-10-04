@@ -45,20 +45,20 @@
                 </div>
             </div>
             <div class="max-w-full overflow-x-auto custom-scrollbar">
-                <table class="w-full text-left border border-gray-800 rounded-lg overflow-hidden shadow-sm">
-                    <thead>
+                <table class="w-full text-sm border mt-2">
+                    <thead class="bg-gray-100">
                         <tr class="bg-gray-200 text-gray-700">
-                            <th class="px-6 py-3 text-sm font-semibold">No.</th>
-                            <th class="px-6 py-3 text-sm font-semibold">Nama Pekerjaan</th>
-                            <th class="px-6 py-3 text-sm font-semibold w-[25%]">Aksi</th>
+                            <th class="border px-2 py-1">No.</th>
+                            <th class="border px-2 py-1">Nama Pekerjaan</th>
+                            <th class="border px-2 py-1 w-[25%]">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-150 bg-white text-gray-800">
+                    <tbody>
                         @foreach ($list_pekerjaan as $pekerjaan)
                             <tr class="hover:bg-gray-50 transition">
-                                <td class="px-6 py-3">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-3">{{ $pekerjaan->nama_pekerjaan }}</td>
-                                <td class="px-6 py-3 w-[25%]">
+                                <td class="border px-2 py-1">{{ $loop->iteration }}</td>
+                                <td class="border px-2 py-1">{{ $pekerjaan->nama_pekerjaan }}</td>
+                                <td class="border px-2 py-1 w-[25%]">
                                     <div class="flex">
                                         <div class="flex-1">
                                             <a href="{{ route('pekerjaan.edit', $pekerjaan->id) }}"

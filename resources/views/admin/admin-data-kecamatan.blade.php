@@ -45,24 +45,24 @@
                 </div>
             </div>
             <div class="max-w-full overflow-x-auto custom-scrollbar">
-                <table class="w-full text-left border border-gray-800 rounded-lg overflow-hidden shadow-sm">
-                    <thead>
+                <table class="w-full text-sm border mt-2">
+                    <thead class="bg-gray-100">
                         <tr class="bg-gray-200 text-gray-700">
-                            <th class="px-6 py-3 text-sm font-semibold">Kode Kecamatan</th>
-                            <th class="px-6 py-3 text-sm font-semibold">Nama Kecamatan</th>
-                            <th class="px-6 py-3 text-sm font-semibold">Latitude</th>
-                            <th class="px-6 py-3 text-sm font-semibold">Longitude</th>
-                            <th class="px-6 py-3 text-sm font-semibold">Aksi</th>
+                            <th class="border px-2 py-1">Kode Kecamatan</th>
+                            <th class="border px-2 py-1">Nama Kecamatan</th>
+                            <th class="border px-2 py-1">Latitude</th>
+                            <th class="border px-2 py-1">Longitude</th>
+                            <th class="border px-2 py-1">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-150 bg-white text-gray-800">
+                    <tbody>
                         @foreach ($list_kecamatan as $kecamatan)
                             <tr class="hover:bg-gray-50 transition">
-                                <td class="px-6 py-3">{{ $kecamatan->kode_kecamatan }}</td>
-                                <td class="px-6 py-3">{{ $kecamatan->nama_kecamatan }}</td>
-                                <td class="px-6 py-3">{{ $kecamatan->latitude }}</td>
-                                <td class="px-6 py-3">{{ $kecamatan->longitude }}</td>
-                                <td class="px-6 py-3">
+                                <td class="border px-2 py-1">{{ $kecamatan->kode_kecamatan }}</td>
+                                <td class="border px-2 py-1">{{ $kecamatan->nama_kecamatan }}</td>
+                                <td class="border px-2 py-1">{{ $kecamatan->latitude }}</td>
+                                <td class="border px-2 py-1">{{ $kecamatan->longitude }}</td>
+                                <td class="border px-2 py-1">
                                     <div class="flex">
                                         <div class="flex-1">
                                             <a href="{{ route('kecamatan.edit', $kecamatan->kode_kecamatan) }}"
