@@ -35,6 +35,8 @@ return new class extends Migration
             ]);
             $table->foreignId('keluarga_id')->constrained('keluargas');
             $table->enum('peran_dalam_keluarga', ['Kepala Keluarga', 'Istri', 'Anak', 'Lainnya'])->default('Lainnya');
+            $table->boolean('status_wajib_ktp')->default(false);
+            $table->boolean('punya_ktp')->default(false);
             $table->timestamps();
         });
     }

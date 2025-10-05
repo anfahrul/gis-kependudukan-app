@@ -223,6 +223,17 @@
                                 </select>
                             </div>
 
+                            <!-- punya KTP? -->
+                            <div>
+                                <label class="block text-sm font-medium">Memiliki KTP?</label>
+                                <select x-model="formPenduduk.punya_ktp" class="w-full px-3 py-2 border rounded"
+                                    required>
+                                    <option value="" disabled selected>-- Pilih Status KTP --</option>
+                                    <option value="0">Belum Memiliki</option>
+                                    <option value="1">Sudah Memiliki</option>
+                                </select>
+                            </div>
+
                             <!-- tombol simpan penduduk -->
                             <button type="submit"
                                 class="mt-3 px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg 
@@ -234,16 +245,16 @@
                     </form>
 
                     <!-- daftar penduduk -->
-                    <div class="mt-4" x-show="selectedId" x-cloak>
+                    <div class="overflow-x-auto mt-4" x-show="selectedId" x-cloak>
                         <h4 class="font-bold mb-2">Daftar Penduduk</h4>
                         <p>
                             Berikut Daftar Penduduk pada Keluarga dengan No. KK ini.
                         </p>
-                        <table class="w-full text-sm border mt-2">
+                        <table class="w-full text-sm border mt-2 min-w-max mt-2">
                             <thead class="bg-gray-100">
                                 <tr>
-                                    <th class="border px-2 py-1">Nama</th>
                                     <th class="border px-2 py-1">NIK</th>
+                                    <th class="border px-2 py-1">Nama</th>
                                     <th class="border px-2 py-1">Jenis Kelamin</th>
                                     <th class="border px-2 py-1">Tanggal Lahir</th>
                                     <th class="border px-2 py-1">Agama</th>
@@ -251,6 +262,8 @@
                                     <th class="border px-2 py-1">Pendidikan</th>
                                     <th class="border px-2 py-1">Pekerjaan</th>
                                     <th class="border px-2 py-1">Peran</th>
+                                    <th class="border px-2 py-1">Wajib KTP</th>
+                                    <th class="border px-2 py-1">Punya KTP</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -266,6 +279,8 @@
                                         <td class="border px-2 py-1" x-text="p.pendidikan"></td>
                                         <td class="border px-2 py-1" x-text="p.pekerjaan"></td>
                                         <td class="border px-2 py-1" x-text="p.peran_dalam_keluarga"></td>
+                                        <td class="border px-2 py-1" x-text="p.status_wajib_ktp"></td>
+                                        <td class="border px-2 py-1" x-text="p.punya_ktp"></td>
                                     </tr>
                                 </template>
 
@@ -307,7 +322,8 @@
                     golongan_darah: '',
                     pekerjaan_id: '',
                     pendidikan: '',
-                    peran_dalam_keluarga: ''
+                    peran_dalam_keluarga: '',
+                    punya_ktp: '',
                 },
 
                 init() {
@@ -416,13 +432,14 @@
                                 keluarga_id: this.selectedId,
                                 nama: '',
                                 nik: '',
-                                jenis_kelamin: 'L',
+                                jenis_kelamin: '',
                                 tanggal_lahir: '',
-                                agama: 'Islam',
-                                golongan_darah: 'A',
+                                agama: '',
+                                golongan_darah: '',
                                 pekerjaan_id: '',
-                                pendidikan: 'SD Sederajat',
-                                peran_dalam_keluarga: 'Lainnya'
+                                pendidikan: '',
+                                peran_dalam_keluarga: '',
+                                memiliki_ktp: '',
                             };
                         } else {
                             alert('Gagal menyimpan penduduk');

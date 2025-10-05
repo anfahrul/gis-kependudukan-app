@@ -35,6 +35,8 @@ class UpdatePendudukRequest extends FormRequest
             'pekerjaan_id'  => 'required|exists:pekerjaans,id',
             'pendidikan'    => 'required',
             'peran_dalam_keluarga' => 'required|in:Kepala Keluarga,Istri,Anak,Lainnya',
+            'peran_dalam_keluarga' => 'required|in:Kepala Keluarga,Istri,Anak,Lainnya',
+            'memiliki_ktp' => 'required|boolean',
         ];
     }
 }

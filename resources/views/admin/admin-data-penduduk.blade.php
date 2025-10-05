@@ -58,6 +58,8 @@
                             <th class="border px-2 py-1">Pendidikan</th>
                             <th class="border px-2 py-1">Pekerjaan</th>
                             <th class="border px-2 py-1">Peran</th>
+                            <th class="border px-2 py-1">Wajib KTP</th>
+                            <th class="border px-2 py-1">Punya KTP</th>
                             <th class="border px-2 py-1">Aksi</th>
                         </tr>
                     </thead>
@@ -74,6 +76,8 @@
                                 <td class="border px-2 py-1">{{ $penduduk->pendidikan }}</td>
                                 <td class="border px-2 py-1">{{ $penduduk->pekerjaan->nama_pekerjaan }}</td>
                                 <td class="border px-2 py-1">{{ $penduduk->peran_dalam_keluarga }}</td>
+                                <td class="border px-2 py-1">{{ $penduduk->status_wajib_ktp ? 'Ya' : 'Belum' }}</td>
+                                <td class="border px-2 py-1">{{ $penduduk->punya_ktp ? 'Ya' : 'Belum' }}</td>
                                 <td class="px-6 py-3">
                                     <div class="flex">
                                         <div class="flex-1">

@@ -58,6 +58,8 @@ class PendudukController extends Controller
                 'pekerjaan_id',
                 'pendidikan',
                 'peran_dalam_keluarga',
+                'status_wajib_ktp',
+                'punya_ktp',
             ]);
 
         // ubah pekerjaan_id jadi nama pekerjaan biar langsung kebaca
@@ -73,6 +75,8 @@ class PendudukController extends Controller
                 'pendidikan' => $item->pendidikan,
                 'peran_dalam_keluarga' => $item->peran_dalam_keluarga,
                 'pekerjaan' => $item->pekerjaan ? $item->pekerjaan->nama_pekerjaan : null,
+                'status_wajib_ktp' => $item->status_wajib_ktp ? 'Ya' : 'Belum',
+                'punya_ktp' => $item->punya_ktp ? 'Ya' : 'Belum'
             ];
         });
 
@@ -97,9 +101,12 @@ class PendudukController extends Controller
             'pekerjaan_id' => 'required|exists:pekerjaans,id',
             'pendidikan' => 'required',
             'peran_dalam_keluarga' => 'required|in:Kepala Keluarga,Istri,Anak,Lainnya',
+            'punya_ktp' => 'required|boolean'
         ]);
 
-        $penduduk = Penduduk::create($validated);
+        $penduduk = new Penduduk($validated);
+        $penduduk->status_wajib_ktp = $penduduk->calculateWajibKtp();
+        $penduduk->save();
 
         if ($request->wantsJson()) {
             return response()->json([
@@ -142,20 +149,24 @@ class PendudukController extends Controller
     public function update(UpdatePendudukRequest $request, Penduduk $penduduk)
     {
         try {
-            $data = $request->validated();
+            $validated = $request->validated();
 
-            $penduduk->update([
-                'keluarga_id'           => $data['keluarga_id'],
-                'nama'                  => $data['nama'],
-                'nik'                   => $data['nik'],
-                'jenis_kelamin'         => $data['jenis_kelamin'],
-                'tanggal_lahir'         => $data['tanggal_lahir'],
-                'agama'                 => $data['agama'],
-                'golongan_darah'        => $data['golongan_darah'],
-                'pekerjaan_id'          => $data['pekerjaan_id'],
-                'pendidikan'            => $data['pendidikan'],
-                'peran_dalam_keluarga'  => $data['peran_dalam_keluarga'],
-            ]);
+            // $penduduk->update([
+            //     'keluarga_id'           => $data['keluarga_id'],
+            //     'nama'                  => $data['nama'],
+            //     'nik'                   => $data['nik'],
+            //     'jenis_kelamin'         => $data['jenis_kelamin'],
+            //     'tanggal_lahir'         => $data['tanggal_lahir'],
+            //     'agama'                 => $data['agama'],
+            //     'golongan_darah'        => $data['golongan_darah'],
+            //     'pekerjaan_id'          => $data['pekerjaan_id'],
+            //     'pendidikan'            => $data['pendidikan'],
+            //     'peran_dalam_keluarga'  => $data['peran_dalam_keluarga'],
+            // ]);
+
+            $penduduk->fill($validated);
+            $penduduk->wajib_ktp = $penduduk->calculateWajibKtp();
+            $penduduk->save();
 
             return redirect()->route('penduduk.index')
                 ->with('success', 'Data penduduk berhasil diperbarui!');
