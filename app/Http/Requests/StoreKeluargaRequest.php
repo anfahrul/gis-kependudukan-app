@@ -24,7 +24,7 @@ class StoreKeluargaRequest extends FormRequest
         return [
             'no_kk' => 'required|string|max:50|unique:keluargas,no_kk',
             'alamat_rumah' => 'required|string',
-            'kecamatan_id' => 'required|exists:kecamatan,id',
+            'desa_id' => 'required|exists:desa,id',
         ];
     }
 }

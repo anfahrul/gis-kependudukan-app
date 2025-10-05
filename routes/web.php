@@ -35,12 +35,12 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin-dashboard', [AdminController::class, 'index']);
 
-    Route::get('/admin-kecamatan', [KecamatanController::class, 'indexAdmin'])->name('kecamatan.index');
-    Route::get('/admin-kecamatan/tambah', [KecamatanController::class, 'create']);
-    Route::post('/admin-kecamatan/store', [KecamatanController::class, 'store'])->name('kecamatan.store');
-    Route::get('/admin-kecamatan/{kode_kecamatan}/edit', [KecamatanController::class, 'edit'])->name('kecamatan.edit');
-    Route::put('/admin-kecamatan/{kode_kecamatan}', [KecamatanController::class, 'update'])->name('kecamatan.update');
-    Route::delete('/admin-kecamatan/{kode_kecamatan}', [KecamatanController::class, 'destroy'])->name('kecamatan.destroy');
+    Route::get('/admin-desa', [KecamatanController::class, 'indexAdmin'])->name('desa.index');
+    Route::get('/admin-desa/tambah', [KecamatanController::class, 'create']);
+    Route::post('/admin-desa/store', [KecamatanController::class, 'store'])->name('desa.store');
+    Route::get('/admin-desa/{kode_desa}/edit', [KecamatanController::class, 'edit'])->name('desa.edit');
+    Route::put('/admin-desa/{kode_desa}', [KecamatanController::class, 'update'])->name('desa.update');
+    Route::delete('/admin-desa/{kode_desa}', [KecamatanController::class, 'destroy'])->name('desa.destroy');
 
     Route::get('/admin-jenis-pekerjaan', [PekerjaanController::class, 'indexAdmin'])->name('pekerjaan.index');
     Route::get('/admin-jenis-pekerjaan/tambah', [PekerjaanController::class, 'create']);

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Kecamatan;
+use App\Models\Desa;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -14,12 +14,12 @@ class Keluarga extends Model
     protected $fillable = [
         'no_kk',
         'alamat_rumah',
-        'kecamatan_id'
+        'desa_id'
     ];
 
-    public function kecamatan()
+    public function desa()
     {
-        return $this->belongsTo(Kecamatan::class);
+        return $this->belongsTo(Desa::class);
     }
 
     public function penduduks()

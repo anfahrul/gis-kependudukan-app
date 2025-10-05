@@ -22,8 +22,8 @@ class StoreKecamatanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kode_kecamatan'  => 'required|string|max:20|unique:kecamatan,kode_kecamatan',
-            'nama_kecamatan'  => 'required|string|max:255',
+            'kode_desa'  => 'required|string|max:20|unique:desa,kode_desa',
+            'nama_desa'  => 'required|string|max:255',
             'latitude'        => 'required|numeric|between:-90,90',
             'longitude'       => 'required|numeric|between:-180,180',
         ];

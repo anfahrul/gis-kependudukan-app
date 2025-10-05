@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('no_kk', 50)->unique();
             $table->text('alamat_rumah');
-            $table->foreignId('kecamatan_id')->constrained('kecamatan');
+            $table->foreignId('desa_id')->constrained('desa');
             $table->timestamps();
         });
     }

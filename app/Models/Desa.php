@@ -6,22 +6,22 @@ use App\Models\Keluarga;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Kecamatan extends Model
+class Desa extends Model
 {
     /** @use HasFactory<\Database\Factories\KecamatanFactory> */
     use HasFactory;
-    protected $table = 'kecamatan';
+    protected $table = 'desa';
 
     protected $fillable = [
-        'kode_kecamatan',
-        'nama_kecamatan',
+        'kode_desa',
+        'nama_desa',
         'latitude',
         'longitude',
     ];
 
     public function getRouteKeyName()
     {
-        return 'kode_kecamatan';
+        return 'kode_desa';
     }
 
     public function keluargas()

@@ -14,22 +14,22 @@
             <div class="flex flex-col gap-5 mb-6 sm:flex-row sm:justify-between">
                 <div class="w-full">
                     <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">
-                        Data Kecamatan
+                        Data Daftar Desa
                     </h3>
                     <p class="mt-1 text-gray-500 text-theme-sm dark:text-gray-400">
-                        Tambah, edit, dan hapus data kecamatan
+                        Tambah, edit, dan hapus data desa
                     </p>
                 </div>
 
                 <div class="flex items-start w-full gap-3 sm:justify-end">
                     <div class="relative w-fit">
-                        <a href="/admin-kecamatan/tambah"
+                        <a href="/admin-desa/tambah"
                             class="h-10 w-full max-w-11 rounded-lg border border-gray-200 bg-white hover:bg-gray-200 py-2.5 pl-[34px] pr-4 
           text-theme-sm font-medium text-gray-700 shadow-theme-xs focus:outline-hidden focus:ring-0 
           focus-visible:outline-hidden dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 
           xl:max-w-fit xl:pl-11 relative flex items-center">
 
-                            <span class="flex-1 text-left">Tambah Kecamatan</span>
+                            <span class="flex-1 text-left">Tambah Desa</span>
 
                             <div class="absolute inset-0 right-auto flex items-center pointer-events-none left-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -48,24 +48,24 @@
                 <table class="w-full text-sm border mt-2">
                     <thead class="bg-gray-100">
                         <tr class="bg-gray-200 text-gray-700">
-                            <th class="border px-2 py-1">Kode Kecamatan</th>
-                            <th class="border px-2 py-1">Nama Kecamatan</th>
+                            <th class="border px-2 py-1">Kode Desa</th>
+                            <th class="border px-2 py-1">Nama Desa</th>
                             <th class="border px-2 py-1">Latitude</th>
                             <th class="border px-2 py-1">Longitude</th>
                             <th class="border px-2 py-1">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($list_kecamatan as $kecamatan)
+                        @foreach ($list_desa as $desa)
                             <tr class="hover:bg-gray-50 transition">
-                                <td class="border px-2 py-1">{{ $kecamatan->kode_kecamatan }}</td>
-                                <td class="border px-2 py-1">{{ $kecamatan->nama_kecamatan }}</td>
-                                <td class="border px-2 py-1">{{ $kecamatan->latitude }}</td>
-                                <td class="border px-2 py-1">{{ $kecamatan->longitude }}</td>
+                                <td class="border px-2 py-1">{{ $desa->kode_desa }}</td>
+                                <td class="border px-2 py-1">{{ $desa->nama_desa }}</td>
+                                <td class="border px-2 py-1">{{ $desa->latitude }}</td>
+                                <td class="border px-2 py-1">{{ $desa->longitude }}</td>
                                 <td class="border px-2 py-1">
                                     <div class="flex">
                                         <div class="flex-1">
-                                            <a href="{{ route('kecamatan.edit', $kecamatan->kode_kecamatan) }}"
+                                            <a href="{{ route('desa.edit', $desa->kode_desa) }}"
                                                 class="inline-flex items-center px-2 py-1 text-sm font-small text-white bg-cyan-500 rounded-lg shadow hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
                                                 <!-- Icon Info -->
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -79,9 +79,8 @@
                                             </a>
                                         </div>
                                         <div class="flex-1">
-                                            <form action="{{ route('kecamatan.destroy', $kecamatan->kode_kecamatan) }}"
-                                                method="POST"
-                                                onsubmit="return confirm('Yakin ingin menghapus kecamatan ini?')">
+                                            <form action="{{ route('desa.destroy', $desa->kode_desa) }}" method="POST"
+                                                onsubmit="return confirm('Yakin ingin menghapus desa ini?')">
                                                 @csrf
                                                 @method('DELETE')
 

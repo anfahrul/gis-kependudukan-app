@@ -109,11 +109,11 @@
 
                                     <!-- Kecamatan -->
                                     <div class="mb-3">
-                                        <label>Kecamatan</label>
-                                        <select name="modal_kecamatan" x-ref="kecamatan"
-                                            class="w-full border rounded px-2 py-1" required>
-                                            @foreach ($kecamatans as $k)
-                                                <option value="{{ $k->id }}">{{ $k->nama_kecamatan }}</option>
+                                        <label>Desa</label>
+                                        <select name="modal_desa" x-ref="desa" class="w-full border rounded px-2 py-1"
+                                            required>
+                                            @foreach ($desas as $k)
+                                                <option value="{{ $k->id }}">{{ $k->nama_desa }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -351,7 +351,7 @@
                         const formData = new FormData();
                         formData.append('no_kk', this.$refs.no_kk.value);
                         formData.append('alamat_rumah', this.$refs.alamat_rumah.value);
-                        formData.append('kecamatan_id', this.$refs.kecamatan.value);
+                        formData.append('desa_id', this.$refs.desa.value);
 
                         const res = await fetch('{{ route('families.store') }}', {
                             method: 'POST',
@@ -362,6 +362,8 @@
                         });
 
                         const json = await res.json();
+                        console.log('json', json);
+
                         if (json.success) {
                             this.selectedId = json.data.id;
                             this.query = json.data.text;

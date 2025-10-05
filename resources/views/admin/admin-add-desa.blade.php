@@ -18,7 +18,7 @@
             <div class="flex flex-col gap-5 mb-6 sm:flex-row sm:justify-between">
                 <div class="w-full">
                     <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">
-                        Tambah Kecamatan
+                        Tambah Desa
                     </h3>
                     <p class="mt-1 text-gray-500 text-theme-sm dark:text-gray-400">
 
@@ -27,7 +27,7 @@
 
                 <div class="flex items-start w-full gap-3 sm:justify-end">
                     <div class="relative w-fit">
-                        <a href="/admin-kecamatan"
+                        <a href="/admin-desa"
                             class="h-10 w-full max-w-11 rounded-lg border border-gray-200 bg-white hover:bg-gray-200 py-2.5 pl-[34px] pr-4 
           text-theme-sm font-medium text-gray-700 shadow-theme-xs focus:outline-hidden focus:ring-0 
           focus-visible:outline-hidden dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 
@@ -49,33 +49,33 @@
                 </div>
             </div>
             <div class="max-w-full overflow-x-auto custom-scrollbar">
-                <form action="/admin-kecamatan/store" method="POST" class="space-y-6">
+                <form action="/admin-desa/store" method="POST" class="space-y-6">
                     @csrf
 
-                    <!-- Kode Kecamatan -->
+                    <!-- Kode Desa -->
                     <div>
-                        <label for="kode_kecamatan"
+                        <label for="kode_desa"
                             class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                            Kode Kecamatan
+                            Kode desa
                         </label>
-                        <input type="text" id="kode_kecamatan" name="kode_kecamatan"
+                        <input type="text" id="kode_desa" name="kode_desa"
                             class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 
                    bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200
                    focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400 transition duration-200"
-                            placeholder="Masukkan kode kecamatan" required>
+                            placeholder="Masukkan kode desa" required>
                     </div>
 
-                    <!-- Nama Kecamatan -->
+                    <!-- Nama desa -->
                     <div>
-                        <label for="nama_kecamatan"
+                        <label for="nama_desa"
                             class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                            Nama Kecamatan
+                            Nama Desa
                         </label>
-                        <input type="text" id="nama_kecamatan" name="nama_kecamatan"
+                        <input type="text" id="nama_desa" name="nama_desa"
                             class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 
                    bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200
                    focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400 transition duration-200"
-                            placeholder="Masukkan nama kecamatan" required>
+                            placeholder="Masukkan nama desa" required>
                     </div>
 
                     <!-- Latitude -->

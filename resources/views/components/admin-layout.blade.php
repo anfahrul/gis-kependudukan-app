@@ -92,9 +92,9 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
 
                             <!-- Menu Item Daftar Kecamatan -->
                             <li>
-                                <a href="/admin-kecamatan"
-                                    class="menu-item group {{ Request::is('admin-kecamatan') ? 'menu-item-active' : 'menu-item-inactive' }}">
-                                    <svg class="{{ Request::is('admin-kecamatan') ? 'menu-item-icon-active' : 'menu-item-icon-inactive' }}"
+                                <a href="/admin-desa"
+                                    class="menu-item group {{ Request::is('admin-desa') ? 'menu-item-active' : 'menu-item-inactive' }}">
+                                    <svg class="{{ Request::is('admin-desa') ? 'menu-item-icon-active' : 'menu-item-icon-inactive' }}"
                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -102,7 +102,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                                     </svg>
 
                                     <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">
-                                        Data Kecamatan
+                                        Data Daftar Desa
                                     </span>
                                 </a>
                             </li>

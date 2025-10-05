@@ -18,7 +18,7 @@
             <div class="flex flex-col gap-5 mb-6 sm:flex-row sm:justify-between">
                 <div class="w-full">
                     <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">
-                        Edit Kecamatan
+                        Edit Desa
                     </h3>
                     <p class="mt-1 text-gray-500 text-theme-sm dark:text-gray-400">
 
@@ -27,7 +27,7 @@
 
                 <div class="flex items-start w-full gap-3 sm:justify-end">
                     <div class="relative w-fit">
-                        <a href="/admin-kecamatan"
+                        <a href="/admin-desa"
                             class="h-10 w-full max-w-11 rounded-lg border border-gray-200 bg-white hover:bg-gray-200 py-2.5 pl-[34px] pr-4 
           text-theme-sm font-medium text-gray-700 shadow-theme-xs focus:outline-hidden focus:ring-0 
           focus-visible:outline-hidden dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 
@@ -49,39 +49,37 @@
                 </div>
             </div>
             <div class="max-w-full overflow-x-auto custom-scrollbar">
-                <form action="{{ route('kecamatan.update', $kecamatan->kode_kecamatan) }}" method="POST"
-                    class="space-y-6">
+                <form action="{{ route('desa.update', $desa->kode_desa) }}" method="POST" class="space-y-6">
                     @csrf
                     @method('PUT')
 
-                    <!-- Kode Kecamatan -->
+                    <!-- Kode desa -->
                     <div>
-                        <label for="kode_kecamatan"
+                        <label for="kode_desa"
                             class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                            Kode Kecamatan
+                            Kode desa
                         </label>
 
-                        <input type="text" id="kode_kecamatan" name="kode_kecamatan"
-                            value="{{ old('kode_kecamatan', $kecamatan->kode_kecamatan) }}" readonly
-                            aria-readonly="true"
+                        <input type="text" id="kode_desa" name="kode_desa"
+                            value="{{ old('kode_desa', $desa->kode_desa) }}" readonly aria-readonly="true"
                             class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 
               bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 cursor-not-allowed
               focus:border-indigo-500 focus:ring-0 transition duration-200">
 
                     </div>
 
-                    <!-- Nama Kecamatan -->
+                    <!-- Nama desa -->
                     <div>
-                        <label for="nama_kecamatan"
+                        <label for="nama_desa"
                             class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                            Nama Kecamatan
+                            Nama desa
                         </label>
-                        <input type="text" id="nama_kecamatan" name="nama_kecamatan"
-                            value="{{ old('nama_kecamatan', $kecamatan->nama_kecamatan) }}"
+                        <input type="text" id="nama_desa" name="nama_desa"
+                            value="{{ old('nama_desa', $desa->nama_desa) }}"
                             class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 
                    bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200
                    focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400 transition duration-200"
-                            placeholder="Masukkan nama kecamatan" required>
+                            placeholder="Masukkan nama desa" required>
                     </div>
 
                     <!-- Latitude -->
@@ -90,7 +88,7 @@
                             Latitude
                         </label>
                         <input type="number" step="any" id="latitude" name="latitude"
-                            value="{{ old('latitude', $kecamatan->latitude) }}"
+                            value="{{ old('latitude', $desa->latitude) }}"
                             class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 
                    bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200
                    focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400 transition duration-200"
@@ -104,7 +102,7 @@
                             Longitude
                         </label>
                         <input type="number" step="any" id="longitude" name="longitude"
-                            value="{{ old('longitude', $kecamatan->longitude) }}"
+                            value="{{ old('longitude', $desa->longitude) }}"
                             class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 
                    bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200
                    focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400 transition duration-200"

@@ -22,7 +22,7 @@ class UpdateKecamatanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama_kecamatan'  => 'required|string|max:255',
+            'nama_desa'  => 'required|string|max:255',
             'latitude'        => 'required|numeric|between:-90,90',
             'longitude'       => 'required|numeric|between:-180,180',
         ];

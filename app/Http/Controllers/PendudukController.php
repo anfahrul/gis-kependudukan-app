@@ -6,6 +6,7 @@ use App\Models\Penduduk;
 use App\Models\Kecamatan;
 use App\Http\Requests\StorePendudukRequest;
 use App\Http\Requests\UpdatePendudukRequest;
+use App\Models\Desa;
 use App\Models\Keluarga;
 use App\Models\Pekerjaan;
 use Illuminate\Http\Request;
@@ -35,10 +36,10 @@ class PendudukController extends Controller
      */
     public function create()
     {
-        $list_kecamatan =  Kecamatan::all();
+        $list_desa =  Desa::all();
         return view('admin.admin-add-penduduk', [
             "title" => "Admin - Add Penduduk",
-            "kecamatans" => $list_kecamatan
+            "desas" => $list_desa
         ]);
     }
 
