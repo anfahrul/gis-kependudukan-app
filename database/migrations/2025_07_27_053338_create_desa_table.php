@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nama_desa');
             $table->decimal('latitude', total: 10, places: 8);
             $table->decimal('longitude', total: 11, places: 8);
+            $table->unsignedBigInteger('OBJECTID')->nullable();
             $table->timestamps();
         });
     }

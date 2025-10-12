@@ -3,20 +3,23 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GeoJsonController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\KeluargaController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\DemografiController;
 use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\PekerjaanController;
+use App\Http\Controllers\PublicHomeController;
 
 // Route::get('/welcome', function () {
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('dashboard', ["title" => "Dashboard"]);
-});
+Route::get('/', [PublicHomeController::class, 'index']);
+Route::get('/api/geojson/tanggetada', [GeoJsonController::class, 'getTanggetada']);
+Route::get('/desa/{objectId}', [PublicHomeController::class, 'show']);
+Route::get('/api/geojson/desa/{objectId}', [GeoJsonController::class, 'getDesa']);
 
 Route::get('/daftar-kecamatan', [KecamatanController::class, 'index']);
 
