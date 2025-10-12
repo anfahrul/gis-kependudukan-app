@@ -16,7 +16,7 @@
                 <div class="mx-auto max-w-4xl px-6">
                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mb-8">
                         <x-summary-card title="Jumlah Desa" :value="$jumlahDesa" color="" />
-                        <x-summary-card title="Jumlah Jumlah Penduduk" :value="$jumlahPenduduk" color="" />
+                        <x-summary-card title="Jumlah Penduduk" :value="$jumlahPenduduk" color="" />
                         <x-summary-card title="Jumlah Kartu Keluarga (KK)" :value="$jumlahKepalaKeluarga" color="" />
                     </div>
 

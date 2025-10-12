@@ -53,6 +53,7 @@ class KecamatanController extends Controller
             'nama_desa' => $data['nama_desa'],
             'latitude'       => $data['latitude'],
             'longitude'      => $data['longitude'],
+            'OBJECTID'      => $data['OBJECTID'],
         ]);
 
         // Redirect balik dengan pesan sukses
@@ -91,6 +92,7 @@ class KecamatanController extends Controller
                 'nama_desa' => $data['nama_desa'],
                 'latitude'       => $data['latitude'],
                 'longitude'      => $data['longitude'],
+                'OBJECTID'      => $data['OBJECTID'],
             ]);
 
             return redirect()->route('desa.index')

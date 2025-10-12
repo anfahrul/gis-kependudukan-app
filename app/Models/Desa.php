@@ -17,6 +17,7 @@ class Desa extends Model
         'nama_desa',
         'latitude',
         'longitude',
+        'OBJECTID',
     ];
 
     public function getRouteKeyName()

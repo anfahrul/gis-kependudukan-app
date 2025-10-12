@@ -103,6 +103,18 @@
                             placeholder="Contoh: 122.51234567" required>
                     </div>
 
+                    <!-- Longitude -->
+                    <div>
+                        <label for="OBJECTID" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            OBJECT ID (Sesuaikan dengan ID Lokasi pada data GeoJSON)
+                        </label>
+                        <input type="number" step="any" id="OBJECTID" name="OBJECTID"
+                            class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 
+                   bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200
+                   focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400 transition duration-200"
+                            placeholder="Contoh: 44039" required>
+                    </div>
+
                     <!-- Tombol Submit -->
                     <div class="flex justify-left pt-4">
                         <button type="submit"

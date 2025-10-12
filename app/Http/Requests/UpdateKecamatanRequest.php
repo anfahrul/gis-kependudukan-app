@@ -25,6 +25,7 @@ class UpdateKecamatanRequest extends FormRequest
             'nama_desa'  => 'required|string|max:255',
             'latitude'        => 'required|numeric|between:-90,90',
             'longitude'       => 'required|numeric|between:-180,180',
+            'OBJECTID'       => 'required|numeric',
         ];
     }
 }
