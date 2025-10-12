@@ -31,15 +31,15 @@
                         {{ $jumlahDesa }}</dd>
                 </div>
                 <div class="mx-auto flex max-w-xs flex-col gap-y-4">
-                    <dt class="text-base/7 text-gray-400">Jumlah Kartu Keluarga (KK)</dt>
-                    <dd class="order-first text-3xl font-semibold tracking-tight text-gray-800 sm:text-5xl">
-                        {{ $jumlahKepalaKeluarga }}
-                    </dd>
-                </div>
-                <div class="mx-auto flex max-w-xs flex-col gap-y-4">
                     <dt class="text-base/7 text-gray-400">Jumlah Penduduk</dt>
                     <dd class="order-first text-3xl font-semibold tracking-tight text-gray-800 sm:text-5xl">
                         {{ $jumlahPenduduk }}
+                    </dd>
+                </div>
+                <div class="mx-auto flex max-w-xs flex-col gap-y-4">
+                    <dt class="text-base/7 text-gray-400">Jumlah Kartu Keluarga (KK)</dt>
+                    <dd class="order-first text-3xl font-semibold tracking-tight text-gray-800 sm:text-5xl">
+                        {{ $jumlahKepalaKeluarga }}
                     </dd>
                 </div>
             </dl>

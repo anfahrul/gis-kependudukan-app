@@ -52,6 +52,7 @@
                             <th class="border px-2 py-1">Nama Desa</th>
                             <th class="border px-2 py-1">Latitude</th>
                             <th class="border px-2 py-1">Longitude</th>
+                            <th class="border px-2 py-1">OBJECT ID (Geo ID)</th>
                             <th class="border px-2 py-1">Aksi</th>
                         </tr>
                     </thead>
@@ -62,6 +63,7 @@
                                 <td class="border px-2 py-1">{{ $desa->nama_desa }}</td>
                                 <td class="border px-2 py-1">{{ $desa->latitude }}</td>
                                 <td class="border px-2 py-1">{{ $desa->longitude }}</td>
+                                <td class="border px-2 py-1">{{ $desa->OBJECTID }}</td>
                                 <td class="border px-2 py-1">
                                     <div class="flex">
                                         <div class="flex-1">
