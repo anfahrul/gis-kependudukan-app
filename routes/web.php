@@ -26,7 +26,7 @@ Route::get('/daftar-desa', [KecamatanController::class, 'index']);
 Route::get('/demografi/agama', [DemografiController::class, 'indexAgama']);
 Route::get('/demografi/golongan-darah', [DemografiController::class, 'indexGolonganDarah']);
 Route::get('/demografi/jenis-kelamin', [DemografiController::class, 'indexJenisKelamin']);
-Route::get('/demografi/pekerjaan', [DemografiController::class, 'indexPekerjaan']);
+// Route::get('/demografi/pekerjaan', [DemografiController::class, 'indexPekerjaan']);
 Route::get('/demografi/pendidikan', [DemografiController::class, 'indexPendidikan']);
 
 

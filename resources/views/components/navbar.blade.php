@@ -124,26 +124,6 @@
                                 </svg>
                             </div>
                             <div class="flex-auto">
-                                <a href="/demografi/pekerjaan" class="block font-semibold text-gray-900">
-                                    Pekerjaan
-                                    <span class="absolute inset-0"></span>
-                                </a>
-                                {{-- <p class="mt-1 text-gray-600">Build strategic funnels that will convert</p> --}}
-                            </div>
-                        </div>
-
-                        <div
-                            class="group relative flex items-center gap-x-6 rounded-lg px-4 py-1 text-sm/6 hover:bg-gray-50">
-                            <div
-                                class="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                                <svg class="size-6 text-gray-600 group-hover:text-indigo-600" fill="none"
-                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"
-                                    data-slot="icon">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59" />
-                                </svg>
-                            </div>
-                            <div class="flex-auto">
                                 <a href="/demografi/pendidikan" class="block font-semibold text-gray-900">
                                     Pendidikan
                                     <span class="absolute inset-0"></span>

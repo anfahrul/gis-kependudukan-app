@@ -20,43 +20,47 @@
         </div>
 
         <div class="mx-auto max-w-4xl px-6">
-            <div class="mt-6 overflow-x-auto rounded-lg shadow">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-gray-800 text-gray-200">
-                            <th class="px-6 py-3 text-sm font-semibold">Kode Kecamatan</th>
-                            <th class="px-6 py-3 text-sm font-semibold">Nama Kecamatan</th>
-                            <th class="px-6 py-3 text-sm font-semibold">Latitude</th>
-                            <th class="px-6 py-3 text-sm font-semibold">Longitude</th>
-                            <th class="px-6 py-3 text-sm font-semibold">Aksi</th>
+            <div class="overflow-x-auto rounded-lg shadow p-6">
+                <table id="tabelPendidikan" class="w-full text-sm border">
+                    <thead class="bg-gray-100">
+                        <tr class="bg-gray-200 text-gray-700 text-center">
+                            <th class="border px-2 py-1">Desa</th>
+                            <th class="border px-2 py-1">PAUD</th>
+                            <th class="border px-2 py-1">SD</th>
+                            <th class="border px-2 py-1">SMP</th>
+                            <th class="border px-2 py-1">SMA/SMK</th>
+                            <th class="border px-2 py-1">D1</th>
+                            <th class="border px-2 py-1">D2</th>
+                            <th class="border px-2 py-1">D3</th>
+                            <th class="border px-2 py-1">D4</th>
+                            <th class="border px-2 py-1">S1</th>
+                            <th class="border px-2 py-1">S2</th>
+                            <th class="border px-2 py-1">S3</th>
+                            <th class="border px-2 py-1">Total</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-700 bg-gray-900 text-gray-100">
-                        @foreach ($list_kecamatan as $kecamatan)
-                            <tr class="hover:bg-gray-800 transition">
-                                <td class="px-6 py-3">{{ $kecamatan->kode_kecamatan }}</td>
-                                <td class="px-6 py-3">{{ $kecamatan->nama_kecamatan }}</td>
-                                <td class="px-6 py-3">{{ $kecamatan->latitude }}</td>
-                                <td class="px-6 py-3">{{ $kecamatan->longitude }}</td>
-                                <td class="px-6 py-3">
-                                    <a href="#"
-                                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-                                        <!-- Icon Info -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M11.25 9V7.5m0 6v-3m0 6h.008v.008H11.25V16.5zm9-4.5a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        Detail
-                                    </a>
+                    <tbody>
+                        @foreach ($data as $desa)
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="border px-3 py-2 font-semibold text-left">{{ $desa['nama_desa'] }}</td>
 
-                                </td>
+                                @foreach ($desa['pendidikan'] as $level => $jumlah)
+                                    <td class="border px-2 py-2 text-center">
+                                        {{ $jumlah }}
+                                        @if ($desa['total'] > 0)
+                                            <span class="text-xs text-gray-500">
+                                                ({{ number_format(($jumlah / $desa['total']) * 100, 1) }}%)
+                                            </span>
+                                        @endif
+                                    </td>
+                                @endforeach
+
+                                <td class="border px-2 py-2 text-center font-semibold">{{ $desa['total'] }}</td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-
         </div>
 
     </div>
