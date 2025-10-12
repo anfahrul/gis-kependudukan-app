@@ -18,10 +18,10 @@ use App\Http\Controllers\PublicHomeController;
 
 Route::get('/', [PublicHomeController::class, 'index']);
 Route::get('/api/geojson/tanggetada', [GeoJsonController::class, 'getTanggetada']);
-Route::get('/desa/{objectId}', [PublicHomeController::class, 'show']);
+Route::get('/desa/{objectId}', [PublicHomeController::class, 'show'])->name('desa.show');
 Route::get('/api/geojson/desa/{objectId}', [GeoJsonController::class, 'getDesa']);
 
-Route::get('/daftar-kecamatan', [KecamatanController::class, 'index']);
+Route::get('/daftar-desa', [KecamatanController::class, 'index']);
 
 Route::get('/demografi/agama', [DemografiController::class, 'indexAgama']);
 Route::get('/demografi/golongan-darah', [DemografiController::class, 'indexGolonganDarah']);
@@ -31,7 +31,7 @@ Route::get('/demografi/pendidikan', [DemografiController::class, 'indexPendidika
 
 
 Route::middleware(['guest'])->group(function () {
-    Route::get('/login', [SessionController::class, 'index'])->name('login');;
+    Route::get('/login', [SessionController::class, 'index'])->name('login');
     Route::post('/login', [SessionController::class, 'login'])->name('login');
 });
 

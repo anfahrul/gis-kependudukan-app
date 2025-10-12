@@ -18,7 +18,7 @@
             {{-- SUMMARY CARDS --}}
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
                 <x-summary-card title="Jumlah Penduduk" :value="$totalPenduduk" color="blue" />
-                <x-summary-card title="Jumlah KK" :value="$totalKK" color="" />
+                <x-summary-card title="Jumlah KK" :value="$totalKK" color="green" />
                 <x-summary-card title="Jumlah Wajib KTP" :value="$wajibKtp" color="sky" />
                 <x-summary-card title="Jumlah KTP" :value="$punyaKtp . ' (' . $persenKtp . '%)'" color="purple" />
             </div>

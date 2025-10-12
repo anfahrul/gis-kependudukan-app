@@ -14,8 +14,8 @@ class KecamatanController extends Controller
     public function index()
     {
         $list_desa =  Desa::all();
-        return view('data-kecamatan', [
-            "title" => "Daftar Kecamatan",
+        return view('data-desa', [
+            "title" => "Daftar Desa",
             "list_desa" => $list_desa
         ]);
     }

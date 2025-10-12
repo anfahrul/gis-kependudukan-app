@@ -22,7 +22,7 @@
         <div class="hidden lg:flex lg:gap-x-12">
 
             <a href="/" class="text-sm/6 font-semibold text-gray-900">Dashboard</a>
-            <a href="/daftar-kecamatan" class="text-sm/6 font-semibold text-gray-900">Daftar Kecamatan</a>
+            <a href="/daftar-desa" class="text-sm/6 font-semibold text-gray-900">Daftar Desa</a>
             <div class="relative">
                 <button type="button" @click="isOpen = !isOpen"
                     class="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900" aria-expanded="false">
