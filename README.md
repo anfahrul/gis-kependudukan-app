@@ -67,7 +67,13 @@ php artisan key:generate
 
 ### 5️⃣ Migrasi dan Seeder Database
 
-Buat / migrasi tabel:
+Buat database terlebih dahulu:
+Jika menggunakan command prompt, masuk di folder bin dari mysql, login ke MySQL, terus buat databasenya pake perintah
+```bash
+CREATE DATABASE `gis-kependudukan-app-db`;
+```
+
+Migrasi tabel:
 
 ```bash
 php artisan migrate:fresh
