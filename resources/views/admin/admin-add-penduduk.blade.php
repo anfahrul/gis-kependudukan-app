@@ -181,7 +181,7 @@
                                 <label class="block text-sm font-medium">Golongan Darah</label>
                                 <select x-model="formPenduduk.golongan_darah" class="w-full px-3 py-2 border rounded">
                                     <option value="" disabled selected>-- Pilih Golongan Darah --</option>
-                                    <template x-for="gd in ['A','B','AB','O']" :key="gd">
+                                    <template x-for="gd in ['A','B','AB','O', 'Tidak Tahu / Lainnya']" :key="gd">
                                         <option :value="gd" x-text="gd"></option>
                                     </template>
                                 </select>
@@ -270,8 +270,8 @@
                                 <!-- jika ada penduduk -->
                                 <template x-for="p in penduduk" :key="p.id">
                                     <tr>
-                                        <td class="border px-2 py-1" x-text="p.nama"></td>
                                         <td class="border px-2 py-1" x-text="p.nik"></td>
+                                        <td class="border px-2 py-1" x-text="p.nama"></td>
                                         <td class="border px-2 py-1" x-text="p.jenis_kelamin"></td>
                                         <td class="border px-2 py-1" x-text="p.tanggal_lahir"></td>
                                         <td class="border px-2 py-1" x-text="p.agama"></td>
@@ -310,7 +310,7 @@
                 pekerjaanList: [],
                 pendidikanList: [
                     'PAUD', 'SD Sederajat', 'SMP Sederajat', 'SMA/SMK Sederajat',
-                    'D1', 'D2', 'D3', 'D4', 'S1', 'S2', 'S3'
+                    'D1', 'D2', 'D3', 'D4', 'S1', 'S2', 'S3', 'Tidak Tahu / Lainnya'
                 ],
                 formPenduduk: {
                     keluarga_id: null,

@@ -95,10 +95,14 @@
                 const props = layer.feature.properties;
                 const namaDesa = props.NAMOBJ || "Tanpa Nama";
                 const jumlahPenduduk = props.jumlah_penduduk ?? "Belum ada data";
+                const wajibKtp = props.jumlah_wajib_ktp;
+                const belumWajib = props.jumlah_belum_wajib_ktp;
 
                 layer.bindTooltip(`
                     <strong>Desa:</strong> ${namaDesa}<br>
-                    <strong>Jumlah Penduduk:</strong> ${jumlahPenduduk}
+                    <strong>Jumlah Penduduk:</strong> ${jumlahPenduduk}<br>
+                    <strong>Wajib KTP:</strong> ${wajibKtp}<br>
+                    <strong>Belum Wajib KTP:</strong> ${belumWajib}
                 `, {
                     sticky: true,
                     direction: 'top',
@@ -163,12 +167,22 @@
                 .then(data => {
                     console.log('data', data);
 
+                    function getColor(jumlah) {
+                        if (!jumlah || jumlah === 0) return 'transparent';
+
+                        return jumlah > 250 ? '#E31A1C' :
+                            jumlah > 150 ? '#FEB24C' :
+                                            '#31A354';
+                    }
+
                     const layer = L.geoJSON(data, {
-                        style: {
-                            color: '#2563eb',
-                            weight: 2,
-                            fillColor: '#31A354',
-                            fillOpacity: 0.5
+                        style: function(feature) {
+                            return {
+                                color: '#2563eb',
+                                weight: 2,
+                                fillColor: getColor(feature.properties.jumlah_penduduk),
+                                fillOpacity: 0.5
+                            };
                         }
                     }).addTo(map);
 
@@ -177,9 +191,12 @@
                     // Tambahkan popup info
                     layer.eachLayer(l => {
                         const props = l.feature.properties;
+
                         l.bindPopup(`
-                    <strong>${props.NAMOBJ}</strong><br>
-                    Jumlah Penduduk: {{ number_format($totalPenduduk) }}
+                            <strong>${props.NAMOBJ}</strong><br>
+                            Jumlah Penduduk: ${props.jumlah_penduduk}<br>
+                            Wajib KTP: ${props.jumlah_wajib_ktp}<br>
+                            Belum Wajib KTP: ${props.jumlah_belum_wajib_ktp}
                 `).openPopup();
                     });
                 });

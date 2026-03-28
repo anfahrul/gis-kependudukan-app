@@ -2,11 +2,10 @@
     <nav x-data="{ isOpen: false }" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global">
         <div class="flex lg:flex-1">
-            <a href="#" class="-m-1.5 p-1.5">
-                {{-- <span class="sr-only">Your Company</span> --}}
-                <span><b>SIG KEPENDUDUKAN</b></span>
-                {{-- <img class="h-8 w-auto"
-                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="" /> --}}
+            <a href="#" class="flex items-center gap-2 -m-1.5 p-1.5">
+                <img class="h-8 w-auto"
+                    src="{{ asset('other-images/Lambang_Kab_Kolaka.png') }}" alt="" />
+                <span class="font-bold">SIG KEPENDUDUKAN</span>
             </a>
         </div>
         <div class="flex lg:hidden">

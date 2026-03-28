@@ -40,14 +40,11 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
             <!-- SIDEBAR HEADER -->
             <div :class="sidebarToggle ? 'justify-center' : 'justify-between'"
                 class="flex items-center gap-2 pt-8 sidebar-header pb-7">
-                <a href="index.html">
-                    <span class="logo">
-                        {{-- <img src="{{ asset('tailadmin/build/src/images/logo/logo.svg') }}" alt="Logo" /> --}}
-                        <b>PANEL ADMIN</b>
-                    </span>
 
-                    <img class="logo-icon" :class="sidebarToggle ? 'lg:block' : 'hidden'"
-                        src="{{ asset('tailadmin/build/src/images/logo/logo-icon.svg') }}" alt="Logo" />
+                <a href="#" class="flex items-center gap-2 -m-1.5 p-1.5">
+                    <img class="h-8 w-auto"
+                        src="{{ asset('other-images/Lambang_Kab_Kolaka.png') }}" alt="" />
+                    <span class="font-bold">PANEL ADMIN <br> SIG KEPENDUDUKAN</span>
                 </a>
             </div>
             <!-- SIDEBAR HEADER -->

@@ -82,8 +82,8 @@
                 if (!jumlah || jumlah === 0) {
                     return 'transparent'; // Tidak ada penduduk
                 }
-                return jumlah > 2000 ? '#E31A1C' : // 🔴 Tinggi
-                    jumlah > 1500 ? '#FEB24C' : // 🟠 Sedang
+                return jumlah > 250 ? '#E31A1C' : // 🔴 Tinggi
+                    jumlah > 150 ? '#FEB24C' : // 🟠 Sedang
                     '#31A354'; // 🟢 Rendah
             }
 
@@ -111,10 +111,14 @@
                 const props = layer.feature.properties;
                 const namaDesa = props.NAMOBJ || "Tanpa Nama";
                 const jumlahPenduduk = props.jumlah_penduduk ?? "Belum ada data";
+                const wajibKtp = props.jumlah_wajib_ktp;
+                const belumWajib = props.jumlah_belum_wajib_ktp;
 
                 layer.bindTooltip(`
                     <strong>Desa:</strong> ${namaDesa}<br>
-                    <strong>Jumlah Penduduk:</strong> ${jumlahPenduduk}
+                    <strong>Jumlah Penduduk:</strong> ${jumlahPenduduk}<br>
+                    <strong>Wajib KTP:</strong> ${wajibKtp}<br>
+                    <strong>Belum Wajib KTP:</strong> ${belumWajib}
                 `, {
                     sticky: true,
                     direction: 'top',

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->date('tanggal_lahir');
             $table->enum('agama', ['Islam', 'Protestan', 'Katolik', 'Hindu', 'Buddha', 'Konghucu']);
-            $table->enum('golongan_darah', ['A', 'B', 'AB', 'O']);
+            $table->enum('golongan_darah', ['A', 'B', 'AB', 'O', 'Tidak Tahu / Lainnya'])->default('Tidak Tahu / Lainnya');
             $table->foreignId('pekerjaan_id')->constrained('pekerjaans');
             $table->enum('pendidikan', [
                 'PAUD',
@@ -31,8 +31,9 @@ return new class extends Migration
                 'D4',
                 'S1',
                 'S2',
-                'S3'
-            ]);
+                'S3',
+                'Tidak Tahu / Lainnya'
+            ])->default('Tidak Tahu / Lainnya');
             $table->foreignId('keluarga_id')->constrained('keluargas');
             $table->enum('peran_dalam_keluarga', ['Kepala Keluarga', 'Istri', 'Anak', 'Lainnya'])->default('Lainnya');
             $table->boolean('status_wajib_ktp')->default(false);
