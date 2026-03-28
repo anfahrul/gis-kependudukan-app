@@ -107,6 +107,11 @@ Wajib dijalankan untuk styiling aplikasi:
 npm run dev
 ```
 
+jalankan juga bagian admin, pindah path dahulu ke path tailadmin menggunakan perintah **`cd public/tailadmin`**), kemudian:
+```bash
+npm run dev
+```
+
 ### 7️⃣ Jalankan Server Lokal
 
 Jalankan aplikasi (Buka terminal baru yang berbeda dengan pada saat **`Build Frontend (npm run dev)`**):
