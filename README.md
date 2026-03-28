@@ -42,6 +42,7 @@ cd public/tailadmin
 kemudian jalankan:
 ```bash
 npm install
+npm build
 ```
 
 ### 3️⃣ Konfigurasi File .env
