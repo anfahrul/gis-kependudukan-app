@@ -32,6 +32,18 @@ Install dependensi frontend:
 npm install
 ```
 
+Install dependensi frontend untuk halaman Admin:
+
+pindah path dahulu ke path tailadmin, pada terminal:
+```bash
+cd public/tailadmin
+```
+
+kemudian jalankan:
+```bash
+npm install
+```
+
 ### 3️⃣ Konfigurasi File .env
 
 Salin file **`.env.example`** menjadi **`.env`**:
